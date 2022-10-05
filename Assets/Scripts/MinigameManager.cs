@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Random = System.Random;
+
+public class MinigameManager : MonoBehaviour
+{
+    [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
+
+    private List<GameObject> _randomizedMinigames = new List<GameObject>();
+    private static Random _rng = new Random();
+    
+    void Start()
+    {
+        // Probably should be moved out of start
+        // Ex. on a button press, after a timer, etc.
+        CreateMinigameList();
+        PlayMinigame();
+    }
+
+    private void CreateMinigameList()
+    {
+        // Make the new list to use randomized from the total collection
+        _randomizedMinigames = _minigames.OrderBy(x => _rng.Next()).ToList();
+    }
+    
+    private void PlayMinigame()
+    {
+        if (_randomizedMinigames.Count == 0)
+        {
+            // probably do something here, win state etc.
+            return;
+        }
+        
+        _randomizedMinigames[0].SetActive(true);
+        
+        // Play Minigame
+        //_randomizedMinigames.RemoveAt(0);
+    }
+}
