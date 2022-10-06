@@ -7,8 +7,7 @@ using Random = System.Random;
 public class MinigameManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
-
-    private List<GameObject> _randomizedMinigames = new List<GameObject>();
+    [SerializeField] private List<GameObject> _randomizedMinigames = new List<GameObject>();
     private static Random _rng = new Random();
     
     void Start()
@@ -16,7 +15,7 @@ public class MinigameManager : MonoBehaviour
         // Probably should be moved out of start
         // Ex. on a button press, after a timer, etc.
         CreateMinigameList();
-        PlayMinigame();
+        Invoke(nameof(PlayMinigame), 3f);
     }
 
     private void CreateMinigameList()
@@ -25,7 +24,7 @@ public class MinigameManager : MonoBehaviour
         _randomizedMinigames = _minigames.OrderBy(x => _rng.Next()).ToList();
     }
     
-    private void PlayMinigame()
+    public void PlayMinigame()
     {
         if (_randomizedMinigames.Count == 0)
         {
@@ -34,8 +33,6 @@ public class MinigameManager : MonoBehaviour
         }
         
         _randomizedMinigames[0].SetActive(true);
-        
-        // Play Minigame
-        //_randomizedMinigames.RemoveAt(0);
+        _randomizedMinigames.RemoveAt(0);
     }
 }

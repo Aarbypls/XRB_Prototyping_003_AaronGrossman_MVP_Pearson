@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cut : MonoBehaviour
+public class Hit : MonoBehaviour
 {
     [SerializeField] private MinigameManager _minigameManager;
     
