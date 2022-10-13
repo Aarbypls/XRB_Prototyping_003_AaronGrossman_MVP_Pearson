@@ -28,11 +28,17 @@ public class MinigameManager : MonoBehaviour
     {
         if (_randomizedMinigames.Count == 0)
         {
-            // probably do something here, win state etc.
+            CreateMinigameList();
+            Invoke(nameof(PlayMinigame), 5f);
             return;
         }
         
         _randomizedMinigames[0].SetActive(true);
         _randomizedMinigames.RemoveAt(0);
+    }
+
+    public void StartNextMinigame()
+    {
+        Invoke(nameof(PlayMinigame), 3f);
     }
 }

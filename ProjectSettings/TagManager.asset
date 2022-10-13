@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hammer
+  - Shootable
   layers:
   - Default
   - TransparentFX

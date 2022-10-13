@@ -13,7 +13,7 @@ public class Slap : MonoBehaviour
 
     private void EndGame()
     {
-        _minigameManager.PlayMinigame();
+        _minigameManager.StartNextMinigame();
         this.gameObject.SetActive(false);
     }
 }

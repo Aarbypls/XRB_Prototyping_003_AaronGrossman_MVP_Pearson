@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace Minigames.Hit
 {
-    public enum NailType
-    {
-        Red = 1,
-        Blue = 2, 
-        Green = 3
-    }
-
     public class Nail : MonoBehaviour
     {
         [SerializeField] private Hit _hit;
@@ -27,12 +20,12 @@ namespace Minigames.Hit
                 return;
             }
 
-            _beenHit = true;
-
-            gameObject.transform.position = _endPoint.position;
-            
             if (other.gameObject.CompareTag("Hammer"))
             {
+                _beenHit = true;
+
+                gameObject.transform.position = _endPoint.position;
+                
                 _hit.RegisterHit(_nailType);
             }
         }
