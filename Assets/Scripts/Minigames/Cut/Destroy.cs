@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroy : MonoBehaviour
+namespace Minigames.Cut
 {
-    private void OnTriggerEnter(Collider other)
+    public class Destroy : MonoBehaviour
     {
-     
-         Destroy(other.gameObject, 1f);
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(other.gameObject, 1f);
+        }
     }
 }

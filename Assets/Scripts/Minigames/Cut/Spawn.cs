@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _objects = new List<GameObject>();
-    [SerializeField] private float time = 3f;
+    [SerializeField] private float time = 1f;
     [SerializeField] private int x = 1;
 
     void Start()

@@ -6,7 +6,7 @@ public class Slap : MonoBehaviour
 {
     [SerializeField] private MinigameManager _minigameManager;
     
-    private void Awake()
+    private void OnEnable()
     {
         Invoke(nameof(EndGame), 5f);
     }

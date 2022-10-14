@@ -7,7 +7,8 @@ using Random = System.Random;
 public class MinigameManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
-    [SerializeField] private List<GameObject> _randomizedMinigames = new List<GameObject>();
+    
+    private List<GameObject> _randomizedMinigames = new List<GameObject>();
     private static Random _rng = new Random();
     
     void Start()
@@ -29,7 +30,7 @@ public class MinigameManager : MonoBehaviour
         if (_randomizedMinigames.Count == 0)
         {
             CreateMinigameList();
-            Invoke(nameof(PlayMinigame), 5f);
+            Invoke(nameof(PlayMinigame), 3f);
             return;
         }
         

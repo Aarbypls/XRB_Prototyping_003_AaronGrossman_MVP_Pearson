@@ -20,11 +20,13 @@ namespace Minigames.Hit
         [SerializeField] private AudioClip _woodHitSFX;
         [SerializeField] private AudioClip _nailHitSFX;
         [SerializeField] private GameObject _hammer;
+        [SerializeField] private GameObject _rightHandObject;
 
-        private void Awake()
+        private void OnEnable()
         {
             SetCorrectNailType();
             _hammer.SetActive(true);
+            _rightHandObject.SetActive(false);
         }
 
         private void SetCorrectNailType()
@@ -32,13 +34,13 @@ namespace Minigames.Hit
             Array types = Enum.GetValues(typeof(NailType));
             Random random = new Random();
             _correctNailType = (NailType)types.GetValue(random.Next(types.Length));
-            Debug.Log(_correctNailType);
         }
 
         private void EndGame()
         {
             _minigameManager.StartNextMinigame();
             _hammer.SetActive(false);
+            _rightHandObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
 

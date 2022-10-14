@@ -12,7 +12,12 @@ namespace Minigames.Hit
         [SerializeField] private Transform _endPoint;
 
         private bool _beenHit = false;
-        
+
+        private void OnEnable()
+        {
+            _beenHit = false;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (_beenHit)
@@ -24,7 +29,7 @@ namespace Minigames.Hit
             {
                 _beenHit = true;
 
-                gameObject.transform.position = _endPoint.position;
+                // gameObject.transform.position = _endPoint.position;
                 
                 _hit.RegisterHit(_nailType);
             }

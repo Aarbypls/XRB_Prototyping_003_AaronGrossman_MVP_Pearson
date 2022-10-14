@@ -21,12 +21,14 @@ namespace Minigames.Shoot
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private AudioSource _gunShotAudioSource;
         [SerializeField] private GameObject _gun;
-        
-        private void Awake()
+        [SerializeField] private GameObject _rightHandObject;
+
+        private void OnEnable()
         {
             SetCorrectShootableType();
             _cubeActionReference.action.performed += ShootGun;
             _gun.SetActive(true);
+            _rightHandObject.SetActive(false);
         }
 
         private void SetCorrectShootableType()
@@ -53,6 +55,7 @@ namespace Minigames.Shoot
         {
             _minigameManager.StartNextMinigame();
             _gun.SetActive(false);
+            _rightHandObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
         
