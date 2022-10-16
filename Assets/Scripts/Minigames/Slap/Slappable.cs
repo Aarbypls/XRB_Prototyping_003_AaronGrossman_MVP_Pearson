@@ -42,7 +42,7 @@ namespace Minigames.Slap
                 
                 // TO-DO: Lucas: play sound of slapped chicken here
 
-                Invoke(nameof(RegisterSlap), 3f);
+                Invoke(nameof(RegisterSlap), 2f);
             }
         }
 
