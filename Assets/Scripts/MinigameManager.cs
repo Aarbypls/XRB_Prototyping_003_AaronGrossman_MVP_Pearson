@@ -6,6 +6,8 @@ using Random = System.Random;
 
 public class MinigameManager : MonoBehaviour
 {
+    public float _globalGameTimer = 10f;
+    
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
     
     private List<GameObject> _randomizedMinigames = new List<GameObject>();

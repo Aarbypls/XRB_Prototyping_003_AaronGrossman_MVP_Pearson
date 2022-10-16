@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
@@ -23,11 +24,55 @@ namespace Minigames.Feed
         [SerializeField] private FeedableType _correctFeedableType;
         [SerializeField] private FoodType _correctFoodType;
         [SerializeField] private SFXManager _sfxManager;
+        [SerializeField] private List<Food> _foodList;
+        
+        private float _minigameTimer;
+        private bool _failureClipPlayed = false;
+        private bool _success = false;
+        private bool _ending = false;
+
+        private void Update()
+        {
+            _minigameTimer -= Time.deltaTime;
+
+            if (_minigameTimer <= 0 && !_ending)
+            {
+                // bool needed as we call EndGame on a slight delay for game feel reasons
+                _ending = true;
+                
+                // only play the failure clip if it HASN'T been played before
+                // (i.e., if they ran out of time without doing anything)
+                if (!_failureClipPlayed && !_success)
+                {
+                    _sfxManager.PlayFailureClip();
+                }
+                
+                Invoke(nameof(EndGame), 1f);
+            }
+        }
 
         private void OnEnable()
         {
+            InitializeStartingVariables();
+            EnableFood();
             SetCorrectFeedableType();
             SetCorrectFoodType();
+        }
+
+        private void InitializeStartingVariables()
+        {
+            _minigameTimer = _minigameManager._globalGameTimer;
+            _success = false;
+            _ending = false;
+        }
+        
+        private void EnableFood()
+        {
+            // Necessary as the food objects are deactivated when fed
+            foreach (Food food in _foodList)
+            {
+                food.gameObject.SetActive(true);
+            }
         }
 
         private void SetCorrectFeedableType()
@@ -55,23 +100,13 @@ namespace Minigames.Feed
             if (foodType == _correctFoodType && feedableType == _correctFeedableType)
             {
                 _sfxManager.PlaySuccessClip();
-                HandleSuccess();
+                _success = true;
             }
             else
             {
                 _sfxManager.PlayFailureClip();
-                HandleFailure();
+                _failureClipPlayed = true;
             }
-        }
-        
-        private void HandleSuccess()
-        {
-            EndGame();
-        }
-
-        private void HandleFailure()
-        {
-            EndGame();
         }
     }
 }
