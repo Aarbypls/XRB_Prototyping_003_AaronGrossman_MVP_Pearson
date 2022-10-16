@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 11d81f0ffe1f24d42ab04477a81036e4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  assetDependencies:
+  - type: 0
+    originalUri: Assets\Models\FlySwatter\f.bin
+    assetPath: Assets\Models\FlySwatter\f.bin
+  - type: 0
+    originalUri: Assets\Models\FlySwatter\textures\lambert1_baseColor.jpeg
+    assetPath: Assets\Models\FlySwatter\textures\lambert1_baseColor.jpeg
+  - type: 0
+    originalUri: Assets\Models\FlySwatter\textures\lambert1_metallicRoughness.png
+    assetPath: Assets\Models\FlySwatter\textures\lambert1_metallicRoughness.png
+  - type: 0
+    originalUri: Assets\Models\FlySwatter\textures\lambert1_normal.png
+    assetPath: Assets\Models\FlySwatter\textures\lambert1_normal.png
+  reportItems: []
