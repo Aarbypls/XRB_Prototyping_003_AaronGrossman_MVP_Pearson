@@ -1175,8 +1175,6 @@ MonoBehaviour:
   _sphere2: {fileID: 7639092370572317080, guid: 89f796f0491bd884dabcc395e4026f45, type: 3}
   _spawnPoint1: {fileID: 999078845}
   _spawnPoint2: {fileID: 1255270123}
-  _spawned1: {fileID: 0}
-  _spawned2: {fileID: 0}
 --- !u!1 &616736182
 GameObject:
   m_ObjectHideFlags: 0
