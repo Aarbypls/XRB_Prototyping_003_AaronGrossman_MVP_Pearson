@@ -22,8 +22,9 @@ namespace Minigames.Cut
         [SerializeField] private GameObject _sphere2;
         [SerializeField] private Transform _spawnPoint1;
         [SerializeField] private Transform _spawnPoint2;
-        [SerializeField] private GameObject _spawned1;
-        [SerializeField] private GameObject _spawned2;
+        
+        private GameObject _spawned1;
+        private GameObject _spawned2;
 
         private float _minigameTimer;
         private bool _failureClipPlayed = false;

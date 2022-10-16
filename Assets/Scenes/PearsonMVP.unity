@@ -4290,7 +4290,7 @@ MonoBehaviour:
   _sfxManager: {fileID: 859803033}
   _hitAudioSource: {fileID: 1607472699}
   _woodHitSFX: {fileID: 8300000, guid: 5cffc6ba10c660541b509950188843d4, type: 3}
-  _nailHitSFX: {fileID: 8300000, guid: 3bcc9b79ab16ee2489c9f88ffcf530ed, type: 3}
+  _nailHitSFX: {fileID: 8300000, guid: 5faecb41eb9551b4b8fd717dc5544b0b, type: 3}
   _hammer: {fileID: 789642867}
   _rightHandObject: {fileID: 723166155}
 --- !u!82 &1607472699
@@ -6043,9 +6043,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64694b970c7fd9419e1f5abc0b384b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _globalGameTimer: 10
+  _globalGameTimer: 5
   _minigames:
+  - {fileID: 543967889}
   - {fileID: 1420585492}
+  - {fileID: 1607472696}
+  - {fileID: 1352276814}
+  - {fileID: 903632307}
+  - {fileID: 1015132579}
 --- !u!1 &2106192663
 GameObject:
   m_ObjectHideFlags: 0
