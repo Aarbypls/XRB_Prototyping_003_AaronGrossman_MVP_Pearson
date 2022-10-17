@@ -33,8 +33,7 @@ namespace Minigames.Hit
                 // gameObject.transform.position = _endPoint.position;
                 
                 _hit.RegisterHit(type);
-                this.gameObject.SetActive(false);
-                
+
             }
         }
     }

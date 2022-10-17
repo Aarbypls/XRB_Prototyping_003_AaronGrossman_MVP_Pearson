@@ -13,7 +13,7 @@ namespace Minigames.Feed
 
     public enum FoodType
     {
-        Peach = 1,
+        Orange = 1,
         Pepper = 2,
         Tomato = 3
     }
@@ -73,8 +73,8 @@ namespace Minigames.Feed
             
             switch (_correctFoodType)
             {
-                case FoodType.Peach:
-                    instructions += "peach!";
+                case FoodType.Orange:
+                    instructions += "orange!";
                     break;
                 case FoodType.Pepper:
                     instructions += "pepper!";
