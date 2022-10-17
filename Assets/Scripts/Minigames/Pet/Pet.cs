@@ -36,14 +36,33 @@ namespace Minigames.Pet
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
+        }
+        
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = String.Empty;
+
+            SetCorrectPettableType();
+
+            switch (_correctPettableType)
+            {
+                case PettableType.Chicken:
+                    instructions = "Pet the chicken!";
+                    break;
+                default:
+                    Debug.Log("Pettable type not set correctly!");
+                    break;
+            }
+
+            return instructions;
         }
         
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            SetCorrectPettableType();
         }
         
         private void InitializeStartingVariables()
@@ -72,6 +91,7 @@ namespace Minigames.Pet
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;
             }
             else
             {

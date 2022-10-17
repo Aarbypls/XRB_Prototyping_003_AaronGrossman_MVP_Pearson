@@ -47,26 +47,48 @@ namespace Minigames.Cut
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
+        }
+
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = string.Empty;
+
+            SetCorrectCuttableType();
+
+            switch (_correctCuttableType)
+            {
+                case CuttableType.BlueSphere:
+                    instructions = "Cut the blue sphere!";
+                    break;
+                case CuttableType.RedSphere:
+                    instructions = "Cut the red sphere!";
+                    break;
+                default:
+                    Debug.Log("Cuttable type not set correctly!");
+                    break;
+            }
+
+            return instructions;
         }
         
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            SetCorrectCuttableType();
-            _sword.SetActive(true);
             _rightHandObject.SetActive(false);
+            _sword.SetActive(true);
         }
-        
+
         private void InitializeStartingVariables()
         {
             _minigameTimer = _minigameManager._globalGameTimer;
             _success = false;
             _ending = false;
 
-            _spawned1 = Instantiate(_sphere1, _spawnPoint1.position, Quaternion.identity);
-            _spawned2 = Instantiate(_sphere2, _spawnPoint2.position, Quaternion.identity);
+            _spawned1 = Instantiate(_sphere1, _spawnPoint1.position, Quaternion.identity, transform);
+            _spawned2 = Instantiate(_sphere2, _spawnPoint2.position, Quaternion.identity, transform);
         }
 
         private void SetCorrectCuttableType()
@@ -82,6 +104,7 @@ namespace Minigames.Cut
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;
             }
             else
             {

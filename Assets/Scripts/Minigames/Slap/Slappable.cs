@@ -9,6 +9,8 @@ namespace Minigames.Slap
 
         [SerializeField] private Slap _slap;
         [SerializeField] private float _force = 100f;
+        [SerializeField] private AudioSource _animalSound;
+        [SerializeField] private AudioSource _slapSound;
 
         private bool _hasBeenSlapped = false;
         private Vector3 _initialPosition;
@@ -40,8 +42,9 @@ namespace Minigames.Slap
                 Vector3 hitVector = (transform.position - other.transform.position).normalized;
                 transform.GetComponent<Rigidbody>().AddForce(hitVector * _force);
                 
-                // TO-DO: Lucas: play sound of slapped chicken here
-
+                _animalSound.Play();
+                _slapSound.Play();
+                
                 Invoke(nameof(RegisterSlap), 2f);
             }
         }

@@ -8,12 +8,10 @@ namespace Minigames.Cut
         public Material materialAfterSlice;
         public LayerMask sliceMask;
         public bool isTouched;
-
-        [SerializeField] private Cut _cut;
-
+        
         private void Update()
         {
-            if (isTouched == true)
+            if (isTouched)
             {
                 isTouched = false;
 
@@ -21,11 +19,6 @@ namespace Minigames.Cut
 
                 foreach (Collider objectToBeSliced in objectsToBeSliced)
                 {
-                    if (objectToBeSliced.gameObject.TryGetComponent(out Cuttable cuttable))
-                    {
-                        _cut.RegisterCut(cuttable._CuttableType);
-                    }
-                    
                     SlicedHull slicedObject = SliceObject(objectToBeSliced.gameObject, materialAfterSlice);
 
                     GameObject upperHullGameobject = slicedObject.CreateUpperHull(objectToBeSliced.gameObject, materialAfterSlice);

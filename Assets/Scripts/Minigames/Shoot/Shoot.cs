@@ -23,6 +23,7 @@ namespace Minigames.Shoot
         [SerializeField] private GameObject _gun;
         [SerializeField] private GameObject _rightHandObject;
 
+        private Vector3 _shootPointPosition;
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _success = false;
@@ -30,6 +31,8 @@ namespace Minigames.Shoot
         
         private void Update()
         {
+            _shootPointPosition = _shootPoint.transform.position;
+
             _minigameTimer -= Time.deltaTime;
 
             if (_minigameTimer <= 0 && !_ending)
@@ -44,15 +47,44 @@ namespace Minigames.Shoot
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
+        }
+
+        private void Awake()
+        {
+            _cubeActionReference.action.performed += ShootGun;
+        }
+
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = String.Empty;
+
+            SetCorrectShootableType();
+
+            switch (_correctShootableType)
+            {
+                case ShootableType.Cake:
+                    instructions = "Shoot the cake!";
+                    break;
+                case ShootableType.Hotdog:
+                    instructions = "Shoot the hotdog!";
+                    break;
+                case ShootableType.Pizza:
+                    instructions = "Shoot the pizza!";
+                    break;
+                default:
+                    Debug.Log("Shootable type not set correctly!");
+                    break;
+            }
+            
+            return instructions;
         }
         
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            SetCorrectShootableType();
-            _cubeActionReference.action.performed += ShootGun;
             _gun.SetActive(true);
             _rightHandObject.SetActive(false);
         }
@@ -75,10 +107,11 @@ namespace Minigames.Shoot
         {
             _gunShotAudioSource.Play();
             
-            if (Physics.Raycast(_shootPoint.transform.position, transform.forward, out RaycastHit hit, 100f))
+            if (Physics.Raycast(_shootPointPosition, _shootPoint.transform.forward, out RaycastHit hit, 100f))
             {
                 if (hit.collider.gameObject.TryGetComponent(out Shootable shootable))
                 {
+                    shootable.SpeedUpRotation();
                     RegisterShot(shootable._shootableType);
                 }
             }
@@ -98,6 +131,7 @@ namespace Minigames.Shoot
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;
             }
             else
             {

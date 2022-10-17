@@ -47,16 +47,54 @@ namespace Minigames.Feed
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
+        }
+        
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = String.Empty;
+
+            SetCorrectFeedableType();
+            SetCorrectFoodType();
+
+            switch (_correctFeedableType)
+            {
+                case FeedableType.Cow:
+                    instructions = "Feed the cow the ";
+                    break;
+                case FeedableType.Pig:
+                    instructions = "Feed the pig the ";
+                    break;
+                default:
+                    Debug.Log("Feedable type not set correctly!");
+                    break;
+            }
+            
+            switch (_correctFoodType)
+            {
+                case FoodType.Peach:
+                    instructions += "peach!";
+                    break;
+                case FoodType.Pepper:
+                    instructions += "pepper!";
+                    break;
+                case FoodType.Tomato:
+                    instructions += "tomato!";
+                    break;
+                default:
+                    Debug.Log("Food type not set correctly!");
+                    break;
+            }
+            
+            return instructions;
         }
 
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
             EnableFood();
-            SetCorrectFeedableType();
-            SetCorrectFoodType();
         }
 
         private void InitializeStartingVariables()
@@ -72,6 +110,7 @@ namespace Minigames.Feed
             foreach (Food food in _foodList)
             {
                 food.gameObject.SetActive(true);
+                food.gameObject.transform.parent = transform;
             }
         }
 
@@ -101,11 +140,20 @@ namespace Minigames.Feed
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;
             }
             else
             {
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (Food food in _foodList)
+            {
+                food.gameObject.SetActive(false);
             }
         }
     }
