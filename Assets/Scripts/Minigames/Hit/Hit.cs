@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = System.Random;
 
 namespace Minigames.Hit
@@ -18,8 +17,9 @@ namespace Minigames.Hit
         [SerializeField] private NailType _correctNailType;
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private AudioSource _hitAudioSource;
-        [FormerlySerializedAs("_nailHitSFX")] [SerializeField] private AudioClip _hitSFX;
-        [SerializeField] private GameObject _weapon;
+        [SerializeField] private AudioClip _woodHitSFX;
+        [SerializeField] private AudioClip _nailHitSFX;
+        [SerializeField] private GameObject _hammer;
         [SerializeField] private GameObject _rightHandObject;
 
         private float _minigameTimer;
@@ -43,15 +43,40 @@ namespace Minigames.Hit
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
+        }
+
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = String.Empty;
+            
+            SetCorrectNailType();
+
+            switch (_correctNailType)
+            {
+                case NailType.Blue:
+                    instructions = "Hit the blue nail!";
+                    break;
+                case NailType.Green:
+                    instructions = "Hit the green nail!";
+                    break;
+                case NailType.Red:
+                    instructions = "Hit the red nail!";
+                    break;
+                default:
+                    Debug.Log("Hittable type not set correctly");
+                    break;
+            }
+            
+            return instructions;
         }
         
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            SetCorrectNailType();
-            _weapon.SetActive(true);
+            _hammer.SetActive(true);
             _rightHandObject.SetActive(false);
         }
         
@@ -72,7 +97,7 @@ namespace Minigames.Hit
         private void EndGame()
         {
             _minigameManager.StartNextMinigame();
-            _weapon.SetActive(false);
+            _hammer.SetActive(false);
             _rightHandObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
@@ -81,23 +106,29 @@ namespace Minigames.Hit
         {
             if (nailType == _correctNailType)
             {
-                PlayHitSFX();
+                PlayNailSFX();
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;
             }
             else
             {
-                PlayHitSFX();
+                PlayNailSFX();
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
             }
         }
 
-        private void PlayHitSFX()
+        private void PlayNailSFX()
         {
-            _hitAudioSource.clip = _hitSFX;
+            _hitAudioSource.clip = _nailHitSFX;
             _hitAudioSource.Play();
         }
-        
+
+        public void PlayWoodSFX()
+        {
+            _hitAudioSource.clip = _woodHitSFX;
+            _hitAudioSource.Play();
+        }
     }
 }

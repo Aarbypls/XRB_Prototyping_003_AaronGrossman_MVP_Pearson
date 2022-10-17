@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Minigames.Shoot
@@ -6,16 +7,26 @@ namespace Minigames.Shoot
     {
         public ShootableType _shootableType;
         
-        /*
         [SerializeField] private float _xRotation = 0f;
         [SerializeField] private float _yRotation = 0f;
-        [SerializeField] private float _zRotation = 0f; */
-        
+        [SerializeField] private float _zRotation = 0f;
+
+        private float _rotateSpeed = 1f;
+
+        private void OnEnable()
+        {
+            _rotateSpeed = 1f;
+        }
+
+        public void SpeedUpRotation()
+        {
+            _rotateSpeed = 10f;
+        }
+
         // Update is called once per frame
         void Update()
         {
-            //transform.Rotate(_xRotation, _yRotation, _zRotation);
-            transform.Translate(Vector3.up * (Time.deltaTime/8), Space.Self);
+            transform.Rotate(_xRotation * _rotateSpeed, _yRotation * _rotateSpeed, _zRotation * _rotateSpeed);
         }
     }
 }
