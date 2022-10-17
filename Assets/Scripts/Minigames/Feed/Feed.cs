@@ -110,6 +110,7 @@ namespace Minigames.Feed
             foreach (Food food in _foodList)
             {
                 food.gameObject.SetActive(true);
+                food.gameObject.transform.parent = transform;
             }
         }
 
@@ -145,6 +146,14 @@ namespace Minigames.Feed
             {
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (Food food in _foodList)
+            {
+                food.gameObject.SetActive(false);
             }
         }
     }

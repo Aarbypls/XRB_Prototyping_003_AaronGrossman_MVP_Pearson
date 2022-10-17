@@ -15,6 +15,12 @@ namespace Minigames.Pet
         private float _requiredPettingDistance = 12f;
         private bool _finishedPetting = false;
 
+        private void OnEnable()
+        {
+            _finishedPetting = false;
+            _totalPetDistance = 0f;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out Petter petter))
