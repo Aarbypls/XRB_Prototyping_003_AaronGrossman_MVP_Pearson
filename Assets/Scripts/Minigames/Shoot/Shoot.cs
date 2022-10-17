@@ -64,14 +64,14 @@ namespace Minigames.Shoot
 
             switch (_correctShootableType)
             {
-                case ShootableType.Cake:
-                    instructions = "Shoot the cake!";
+                case ShootableType.Cat:
+                    instructions = "Shoot the cat shaped hot air balloon!";
                     break;
-                case ShootableType.Hotdog:
-                    instructions = "Shoot the hotdog!";
+                case ShootableType.Dog:
+                    instructions = "Shoot the dog shaped hot air balloon!";
                     break;
-                case ShootableType.Pizza:
-                    instructions = "Shoot the pizza!";
+                case ShootableType.Chicken:
+                    instructions = "Shoot the chicken shaped hot air balloon!";
                     break;
                 default:
                     Debug.Log("Shootable type not set correctly!");

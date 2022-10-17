@@ -1,25 +1,26 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
 
 namespace Minigames.Hit
 {
-    public enum NailType
+    public enum Type
     {
-        Red = 1,
-        Blue = 2, 
-        Green = 3
+        Fly = 1,
+        Ladybug = 2, 
+        Cockroach = 3
     }
     
     public class Hit : MonoBehaviour
     {
         [SerializeField] private MinigameManager _minigameManager;
-        [SerializeField] private NailType _correctNailType;
+        [FormerlySerializedAs("_correctNailType")] [SerializeField] private Type correctType;
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private AudioSource _hitAudioSource;
-        [SerializeField] private AudioClip _woodHitSFX;
-        [SerializeField] private AudioClip _nailHitSFX;
-        [SerializeField] private GameObject _hammer;
+        [SerializeField] private AudioClip _surfaceHitSFX;
+        [FormerlySerializedAs("_nailHitSFX")] [SerializeField] private AudioClip _hitSFX;
+        [FormerlySerializedAs("_hammer")] [SerializeField] private GameObject _weapon;
         [SerializeField] private GameObject _rightHandObject;
 
         private float _minigameTimer;
@@ -50,19 +51,20 @@ namespace Minigames.Hit
         public string SetObjectivesAndGetUIText()
         {
             string instructions = String.Empty;
-            
-            SetCorrectNailType();
 
-            switch (_correctNailType)
+            correctType = Type.Fly;
+            //SetCorrectType();
+
+            switch (correctType)
             {
-                case NailType.Blue:
-                    instructions = "Hit the blue nail!";
+                case Type.Fly:
+                    instructions = "Swat the Fly!";
                     break;
-                case NailType.Green:
-                    instructions = "Hit the green nail!";
+                case Type.Ladybug:
+                    instructions = "Swat the Ladybug!";
                     break;
-                case NailType.Red:
-                    instructions = "Hit the red nail!";
+                case Type.Cockroach:
+                    instructions = "Swat the Cockroach!";
                     break;
                 default:
                     Debug.Log("Hittable type not set correctly");
@@ -76,7 +78,7 @@ namespace Minigames.Hit
         {
             _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            _hammer.SetActive(true);
+            _weapon.SetActive(true);
             _rightHandObject.SetActive(false);
         }
         
@@ -87,24 +89,24 @@ namespace Minigames.Hit
             _ending = false;
         }
 
-        private void SetCorrectNailType()
+        private void SetCorrectType()
         {
-            Array types = Enum.GetValues(typeof(NailType));
+            Array types = Enum.GetValues(typeof(Type));
             Random random = new Random();
-            _correctNailType = (NailType)types.GetValue(random.Next(types.Length));
+            correctType = (Type)types.GetValue(random.Next(types.Length));
         }
 
         private void EndGame()
         {
             _minigameManager.StartNextMinigame();
-            _hammer.SetActive(false);
+            _weapon.SetActive(false);
             _rightHandObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
 
-        public void RegisterHit(NailType nailType)
+        public void RegisterHit(Type type)
         {
-            if (nailType == _correctNailType)
+            if (type == correctType)
             {
                 PlayNailSFX();
                 _sfxManager.PlaySuccessClip();
@@ -121,13 +123,13 @@ namespace Minigames.Hit
 
         private void PlayNailSFX()
         {
-            _hitAudioSource.clip = _nailHitSFX;
+            _hitAudioSource.clip = _hitSFX;
             _hitAudioSource.Play();
         }
 
         public void PlayWoodSFX()
         {
-            _hitAudioSource.clip = _woodHitSFX;
+            _hitAudioSource.clip = _surfaceHitSFX;
             _hitAudioSource.Play();
         }
     }
