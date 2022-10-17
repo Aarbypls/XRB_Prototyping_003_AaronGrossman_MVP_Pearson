@@ -12,7 +12,7 @@ namespace Minigames.Pet
         private Vector3 _lastRightHandPosition;
         
         private float _totalPetDistance;
-        private float _requiredPettingDistance = 15f;
+        private float _requiredPettingDistance = 12f;
         private bool _finishedPetting = false;
 
         private void OnTriggerEnter(Collider other)
