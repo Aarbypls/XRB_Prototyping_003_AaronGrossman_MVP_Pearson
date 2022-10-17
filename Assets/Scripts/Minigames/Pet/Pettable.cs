@@ -63,8 +63,6 @@ namespace Minigames.Pet
 
         private void Update()
         {
-            Debug.Log(_totalPetDistance);
-
             if (_finishedPetting)
             {
                 return;

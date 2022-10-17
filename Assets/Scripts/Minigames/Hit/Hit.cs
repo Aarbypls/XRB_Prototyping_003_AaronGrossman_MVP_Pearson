@@ -58,13 +58,13 @@ namespace Minigames.Hit
             switch (correctType)
             {
                 case Type.Fly:
-                    instructions = "Swat the Fly!";
+                    instructions = "Hit the Fly!";
                     break;
                 case Type.Ladybug:
-                    instructions = "Swat the Ladybug!";
+                    instructions = "Hit the Ladybug!";
                     break;
                 case Type.Cockroach:
-                    instructions = "Swat the Cockroach!";
+                    instructions = "Hit the Cockroach!";
                     break;
                 default:
                     Debug.Log("Hittable type not set correctly");
