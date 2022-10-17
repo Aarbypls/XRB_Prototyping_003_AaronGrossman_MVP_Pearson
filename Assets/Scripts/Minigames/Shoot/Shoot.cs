@@ -7,9 +7,9 @@ namespace Minigames.Shoot
 {
     public enum ShootableType
     {
-        Pizza =  1,
-        Hotdog = 2,
-        Cake = 3
+        Cat =  1,
+        Dog = 2,
+        Chicken = 3
     }
     
     public class Shoot : MonoBehaviour
