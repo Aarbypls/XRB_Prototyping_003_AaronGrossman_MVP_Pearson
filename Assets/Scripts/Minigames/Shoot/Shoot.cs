@@ -47,7 +47,7 @@ namespace Minigames.Shoot
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
         }
 
@@ -131,6 +131,7 @@ namespace Minigames.Shoot
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;
             }
             else
             {

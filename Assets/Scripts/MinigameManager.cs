@@ -14,6 +14,7 @@ using Random = System.Random;
 public class MinigameManager : MonoBehaviour
 {
     public float _globalGameTimer = 10f;
+    public float _globalEndOfGameTimer = .1f;
     
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI _minigameInstructions;
@@ -45,7 +46,7 @@ public class MinigameManager : MonoBehaviour
         }
         
         SetMinigameInstructionsUIText();
-        Invoke(nameof(SetMinigameActive), 3f);
+        Invoke(nameof(SetMinigameActive), 2f);
     }
 
     private void SetMinigameActive()
@@ -56,7 +57,7 @@ public class MinigameManager : MonoBehaviour
 
     public void StartNextMinigame()
     {
-        Invoke(nameof(PlayMinigame), 1f);
+        Invoke(nameof(PlayMinigame), .1f);
     }
     
     public void SetMinigameInstructionsUIText()

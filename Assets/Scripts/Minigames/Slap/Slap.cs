@@ -37,7 +37,7 @@ namespace Minigames.Slap
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), 1f);
+                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
             }
         }
 
@@ -82,12 +82,11 @@ namespace Minigames.Slap
 
         public void RegisterSlap(SlappableType slappableType)
         {
-            
-            
             if (slappableType == _correctSlappableType)
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
+                _minigameTimer = 1f;                
             }
             else
             {
