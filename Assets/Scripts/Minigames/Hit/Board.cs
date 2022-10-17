@@ -10,7 +10,7 @@ namespace Minigames.Hit
         {
             if (other.gameObject.CompareTag("Hammer"))
             {
-                _hit.PlayWoodSFX();
+                //_hit.PlayWoodSFX();
             }
         }
     }

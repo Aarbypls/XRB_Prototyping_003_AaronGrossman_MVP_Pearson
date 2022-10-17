@@ -1,49 +1,9 @@
 fileFormatVersion: 2
-guid: 42527ae97da8ec245a30a2dd56c21294
+guid: e83cf94bd1084bf41b4d6b24abb4b2df
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: black
-    second: {fileID: 2100000, guid: c5471f5c0fa7b1d4fb1e4496d7e51602, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blue
-    second: {fileID: 2100000, guid: 87069f766454df4498fdf5f468fdd307, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: brown
-    second: {fileID: 2100000, guid: 339a8876a79fbdc48a7deb67ce94762c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: emerald
-    second: {fileID: 2100000, guid: b44b875459bb406448ba929b4eba0fcf, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: fly-white
-    second: {fileID: 2100000, guid: b0cb084ebbca93448bc5b9dde3b2e214, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: flywings-dark
-    second: {fileID: 2100000, guid: 21c70f07af89f6a4a957f27f1eeff5d5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: glass
-    second: {fileID: 2100000, guid: b533f1f3cb60b9d40844dad3aa72e3fa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: red-eye
-    second: {fileID: 2100000, guid: bd4b60f2065fd454eabe554d59e2277f, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

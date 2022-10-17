@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
 
 namespace Minigames.Hit
@@ -17,9 +18,8 @@ namespace Minigames.Hit
         [SerializeField] private NailType _correctNailType;
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private AudioSource _hitAudioSource;
-        [SerializeField] private AudioClip _woodHitSFX;
-        [SerializeField] private AudioClip _nailHitSFX;
-        [SerializeField] private GameObject _hammer;
+        [FormerlySerializedAs("_nailHitSFX")] [SerializeField] private AudioClip _hitSFX;
+        [SerializeField] private GameObject _weapon;
         [SerializeField] private GameObject _rightHandObject;
 
         private float _minigameTimer;
@@ -51,7 +51,7 @@ namespace Minigames.Hit
         {
             InitializeStartingVariables();
             SetCorrectNailType();
-            _hammer.SetActive(true);
+            _weapon.SetActive(true);
             _rightHandObject.SetActive(false);
         }
         
@@ -72,7 +72,7 @@ namespace Minigames.Hit
         private void EndGame()
         {
             _minigameManager.StartNextMinigame();
-            _hammer.SetActive(false);
+            _weapon.SetActive(false);
             _rightHandObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
@@ -81,28 +81,23 @@ namespace Minigames.Hit
         {
             if (nailType == _correctNailType)
             {
-                PlayNailSFX();
+                PlayHitSFX();
                 _sfxManager.PlaySuccessClip();
                 _success = true;
             }
             else
             {
-                PlayNailSFX();
+                PlayHitSFX();
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
             }
         }
 
-        private void PlayNailSFX()
+        private void PlayHitSFX()
         {
-            _hitAudioSource.clip = _nailHitSFX;
+            _hitAudioSource.clip = _hitSFX;
             _hitAudioSource.Play();
         }
-
-        public void PlayWoodSFX()
-        {
-            _hitAudioSource.clip = _woodHitSFX;
-            _hitAudioSource.Play();
-        }
+        
     }
 }
