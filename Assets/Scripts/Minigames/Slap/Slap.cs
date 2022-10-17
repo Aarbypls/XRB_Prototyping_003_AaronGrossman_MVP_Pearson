@@ -20,7 +20,7 @@ namespace Minigames.Slap
         private bool _failureClipPlayed = false;
         private bool _success = false;
         private bool _ending = false;
-        
+
         private void Update()
         {
             _minigameTimer -= Time.deltaTime;
@@ -40,13 +40,32 @@ namespace Minigames.Slap
                 Invoke(nameof(EndGame), 1f);
             }
         }
+
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = string.Empty;
+
+            SetCorrectSlappableType();
+
+            switch (_correctSlappableType)
+            {
+                case SlappableType.Chicken:
+                    instructions = "Slap the chicken!";
+                    break;
+                default:
+                    Debug.Log("Cuttable type not set correctly!");
+                    break;
+            }
+
+            return instructions;
+        }
         
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            SetCorrectSlappableType();
         }
-        
+
         private void InitializeStartingVariables()
         {
             _minigameTimer = _minigameManager._globalGameTimer;
@@ -60,15 +79,11 @@ namespace Minigames.Slap
             Random random = new Random();
             _correctSlappableType = (SlappableType)types.GetValue(random.Next(types.Length));
         }
-        
-        private void EndGame()
-        {
-            _minigameManager.StartNextMinigame();
-            this.gameObject.SetActive(false);
-        }
 
         public void RegisterSlap(SlappableType slappableType)
         {
+            
+            
             if (slappableType == _correctSlappableType)
             {
                 _sfxManager.PlaySuccessClip();
@@ -79,6 +94,12 @@ namespace Minigames.Slap
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
             }
+        }
+        
+        private void EndGame()
+        {
+            _minigameManager.StartNextMinigame();
+            this.gameObject.SetActive(false);
         }
     }
 }

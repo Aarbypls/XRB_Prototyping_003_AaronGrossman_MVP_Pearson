@@ -46,11 +46,36 @@ namespace Minigames.Hit
                 Invoke(nameof(EndGame), 1f);
             }
         }
+
+        public string SetObjectivesAndGetUIText()
+        {
+            string instructions = String.Empty;
+            
+            SetCorrectNailType();
+
+            switch (_correctNailType)
+            {
+                case NailType.Blue:
+                    instructions = "Hit the blue nail!";
+                    break;
+                case NailType.Green:
+                    instructions = "Hit the green nail!";
+                    break;
+                case NailType.Red:
+                    instructions = "Hit the red nail!";
+                    break;
+                default:
+                    Debug.Log("Hittable type not set correctly");
+                    break;
+            }
+            
+            return instructions;
+        }
         
         private void OnEnable()
         {
+            _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
-            SetCorrectNailType();
             _hammer.SetActive(true);
             _rightHandObject.SetActive(false);
         }

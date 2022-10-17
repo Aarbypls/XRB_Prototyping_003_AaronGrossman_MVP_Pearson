@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Minigames.Cut
@@ -7,6 +8,8 @@ namespace Minigames.Cut
         public CuttableType _CuttableType;
         
         [SerializeField] private float _speed = 1f;
+        [SerializeField] private Cut _cut;
+        
         private Vector3 _position1;
         private Vector3 _position2;
         private Vector3 _target;
@@ -14,6 +17,7 @@ namespace Minigames.Cut
 
         private void Awake()
         {
+            _cut = GetComponentInParent<Cut>();
             _position1 = transform.position;
             _position2 = new Vector3(_position1.x, _position1.y + 2, _position1.z);
             _target = _position2;
@@ -31,6 +35,14 @@ namespace Minigames.Cut
             }
 
             transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.GetComponent<SliceListener>())
+            {
+                _cut.RegisterCut(_CuttableType);
+            }
         }
     }
 }
