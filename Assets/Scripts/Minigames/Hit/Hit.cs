@@ -22,6 +22,7 @@ namespace Minigames.Hit
         [FormerlySerializedAs("_nailHitSFX")] [SerializeField] private AudioClip _hitSFX;
         [FormerlySerializedAs("_hammer")] [SerializeField] private GameObject _weapon;
         [SerializeField] private GameObject _rightHandObject;
+        [SerializeField] private GameObject _hittableObject;
 
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -84,6 +85,7 @@ namespace Minigames.Hit
         
         private void InitializeStartingVariables()
         {
+            _hittableObject.SetActive(true);
             _minigameTimer = _minigameManager._globalGameTimer;
             _success = false;
             _ending = false;
@@ -124,12 +126,6 @@ namespace Minigames.Hit
         private void PlayNailSFX()
         {
             _hitAudioSource.clip = _hitSFX;
-            _hitAudioSource.Play();
-        }
-
-        public void PlayWoodSFX()
-        {
-            _hitAudioSource.clip = _surfaceHitSFX;
             _hitAudioSource.Play();
         }
     }

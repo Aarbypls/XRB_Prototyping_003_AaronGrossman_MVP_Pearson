@@ -30,10 +30,9 @@ namespace Minigames.Hit
             {
                 _beenHit = true;
 
-                // gameObject.transform.position = _endPoint.position;
-                
                 _hit.RegisterHit(type);
 
+                gameObject.SetActive(false);
             }
         }
     }
