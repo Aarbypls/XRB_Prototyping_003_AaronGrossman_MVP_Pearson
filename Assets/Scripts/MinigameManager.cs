@@ -18,6 +18,7 @@ public class MinigameManager : MonoBehaviour
     
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI _minigameInstructions;
+    [SerializeField] private AudioSource _promptAudioSource;
     
     private List<GameObject> _randomizedMinigames = new List<GameObject>();
     private static Random _rng = new Random();
@@ -46,7 +47,7 @@ public class MinigameManager : MonoBehaviour
         }
         
         SetMinigameInstructionsUIText();
-        Invoke(nameof(SetMinigameActive), 2f);
+        Invoke(nameof(SetMinigameActive),  _promptAudioSource.clip == null ? 2f : _promptAudioSource.clip.length + 1.5f);
     }
 
     private void SetMinigameActive()
@@ -64,7 +65,8 @@ public class MinigameManager : MonoBehaviour
     {
         GameObject nextMinigame = _randomizedMinigames[0];
         string instructions = "";
-        
+        _promptAudioSource.clip = null;
+
         // very hacky way to do this, would refactor in larger project
         if (nextMinigame.TryGetComponent(out Cut cut))
         {
@@ -81,6 +83,7 @@ public class MinigameManager : MonoBehaviour
         else if (nextMinigame.TryGetComponent(out Shoot shoot))
         {
             instructions = shoot.SetObjectivesAndGetUIText();
+            _promptAudioSource.clip = shoot.GetPromptAudioClip();
         }
         else if (nextMinigame.TryGetComponent(out Feed feed))
         {
@@ -93,6 +96,11 @@ public class MinigameManager : MonoBehaviour
         
         _minigameInstructions.gameObject.SetActive(true);
         _minigameInstructions.SetText(instructions);
+
+        if (_promptAudioSource)
+        {
+            _promptAudioSource.Play();
+        }
     }
 
     public void HideInstructionsText()

@@ -23,6 +23,11 @@ namespace Minigames.Shoot
         [SerializeField] private GameObject _gun;
         [SerializeField] private GameObject _rightHandObject;
 
+        [Header("Prompts")] 
+        [SerializeField] private AudioClip _chickenPrompt;
+        [SerializeField] private AudioClip _dogPrompt;
+        [SerializeField] private AudioClip _catPrompt;
+        
         private Vector3 _shootPointPosition;
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -79,6 +84,29 @@ namespace Minigames.Shoot
             }
             
             return instructions;
+        }
+
+        public AudioClip GetPromptAudioClip()
+        {
+            AudioClip audioClip = null;
+            
+            switch (_correctShootableType)
+            {
+                case ShootableType.Cat:
+                    audioClip = _catPrompt;
+                    break;
+                case ShootableType.Dog:
+                    audioClip = _dogPrompt;
+                    break;
+                case ShootableType.Chicken:
+                    audioClip = _chickenPrompt;
+                    break;
+                default:
+                    Debug.Log("Shootable type not set correctly!");
+                    break;
+            }
+
+            return audioClip;
         }
         
         private void OnEnable()
