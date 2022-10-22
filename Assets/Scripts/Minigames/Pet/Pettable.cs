@@ -5,7 +5,8 @@ namespace Minigames.Pet
 {
     public class Pettable : MonoBehaviour
     {
-        [SerializeField] private PettableType _pettableType;
+        public PettableType _pettableType;
+        
         [SerializeField] private Pet _pet;
         
         private Vector3 _lastLeftHandPosition;

@@ -111,7 +111,7 @@ namespace Minigames.Shoot
             {
                 if (hit.collider.gameObject.TryGetComponent(out Shootable shootable))
                 {
-                    shootable.SpeedUpRotation();
+                    shootable.HideAndShootConfetti();
                     RegisterShot(shootable._shootableType);
                 }
             }

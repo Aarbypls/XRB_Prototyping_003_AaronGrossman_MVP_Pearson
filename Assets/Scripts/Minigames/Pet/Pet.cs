@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
@@ -6,7 +7,9 @@ namespace Minigames.Pet
 {
     public enum PettableType
     {
-        Chicken = 1
+        Chicken = 1,
+        Duck = 2,
+        Pig = 3
     }
     
     public class Pet : MonoBehaviour
@@ -14,6 +17,7 @@ namespace Minigames.Pet
         [SerializeField] private MinigameManager _minigameManager;
         [SerializeField] private PettableType _correctPettableType;
         [SerializeField] private SFXManager _sfxManager;
+        [SerializeField] private List<Pettable> _pettables;
 
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -51,6 +55,12 @@ namespace Minigames.Pet
                 case PettableType.Chicken:
                     instructions = "Pet the chicken!";
                     break;
+                case PettableType.Duck:
+                    instructions = "Pet the duck!";
+                    break;
+                case PettableType.Pig:
+                    instructions = "Pet the pig!";
+                    break;
                 default:
                     Debug.Log("Pettable type not set correctly!");
                     break;
@@ -67,6 +77,14 @@ namespace Minigames.Pet
         
         private void InitializeStartingVariables()
         {
+            foreach (Pettable pettable in _pettables)
+            {
+                if (pettable._pettableType == _correctPettableType)
+                {
+                    pettable.gameObject.SetActive(true);
+                }
+            }
+            
             _minigameTimer = _minigameManager._globalGameTimer;
             _success = false;
             _ending = false;
@@ -81,6 +99,11 @@ namespace Minigames.Pet
 
         private void EndGame()
         {
+            foreach (Pettable pettable in _pettables)
+            {
+                pettable.gameObject.SetActive(false);
+            }
+            
             _minigameManager.StartNextMinigame();
             this.gameObject.SetActive(false);
         }
