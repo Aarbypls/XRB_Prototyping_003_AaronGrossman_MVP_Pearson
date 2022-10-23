@@ -26,6 +26,17 @@ namespace Minigames.Slap
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Slappable> _slappables;
         
+        [Header("Prompts")]
+        [SerializeField] private AudioClip _yellowRubberDuckPrompt;
+        [SerializeField] private AudioClip _blueRubberDuckPrompt;
+        [SerializeField] private AudioClip _redRubberDuckPrompt;
+        [SerializeField] private AudioClip _purpleRubberDuckPrompt;
+        [SerializeField] private AudioClip _greenRubberDuckPrompt;
+        [SerializeField] private AudioClip _orangeRubberDuckPrompt;
+        [SerializeField] private AudioClip _pinkRubberDuckPrompt;
+        [SerializeField] private AudioClip _whiteRubberDuckPrompt;
+        [SerializeField] private AudioClip _blackRubberDuckPrompt;
+
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _success = false;
@@ -92,6 +103,47 @@ namespace Minigames.Slap
             }
 
             return instructions;
+        }
+
+        public AudioClip GetPromptAudioClip()
+        {
+            AudioClip audioClip = null;
+            
+            switch (_correctSlappableType)
+            {
+                case SlappableType.YellowRubberDuck:
+                    audioClip = _yellowRubberDuckPrompt;
+                    break;
+                case SlappableType.BlueRubberDuck:
+                    audioClip = _blueRubberDuckPrompt;
+                    break;
+                case SlappableType.RedRubberDuck:
+                    audioClip = _redRubberDuckPrompt;
+                    break;
+                case SlappableType.PurpleRubberDuck:
+                    audioClip = _purpleRubberDuckPrompt;
+                    break;
+                case SlappableType.GreenRubberDuck:
+                    audioClip = _greenRubberDuckPrompt;
+                    break;
+                case SlappableType.OrangeRubberDuck:
+                    audioClip = _orangeRubberDuckPrompt;
+                    break;
+                case SlappableType.PinkRubberDuck:
+                    audioClip = _pinkRubberDuckPrompt;
+                    break;
+                case SlappableType.WhiteRubberDuck:
+                    audioClip = _whiteRubberDuckPrompt;
+                    break;
+                case SlappableType.BlackRubberDuck:
+                    audioClip = _blackRubberDuckPrompt;
+                    break;
+                default:
+                    Debug.Log("Cuttable type not set correctly!");
+                    break;
+            }
+
+            return audioClip;
         }
         
         private void OnEnable()

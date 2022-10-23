@@ -3998,6 +3998,8 @@ MonoBehaviour:
   _sphere2: {fileID: 7639092370572317080, guid: 89f796f0491bd884dabcc395e4026f45, type: 3}
   _spawnPoint1: {fileID: 999078845}
   _spawnPoint2: {fileID: 1255270123}
+  _redSpherePrompt: {fileID: 8300000, guid: 816bff8cea8f8234ca612a5a6445ae0b, type: 3}
+  _blueSpherePrompt: {fileID: 8300000, guid: a30ecacdb85404748ae99eefa8c682aa, type: 3}
 --- !u!1 &572051641
 GameObject:
   m_ObjectHideFlags: 0
@@ -6715,6 +6717,12 @@ MonoBehaviour:
   - {fileID: 410463274}
   - {fileID: 1767268884}
   - {fileID: 1387648110}
+  _cowOrangePrompt: {fileID: 8300000, guid: 003b6c4568d8a344b997fc1b133f7ae0, type: 3}
+  _cowPepperPrompt: {fileID: 8300000, guid: 45cc3fdb6e8ea8d479910eebe286e9ae, type: 3}
+  _cowTomatoPrompt: {fileID: 8300000, guid: 6b3addebe90ae57429de00f1f30fcaf1, type: 3}
+  _pigOrangePrompt: {fileID: 8300000, guid: 9dccffb1f26c8d7498aa0d49d8dcae47, type: 3}
+  _pigPepperPrompt: {fileID: 8300000, guid: 6b0f651e5c901ad4898ce900d25633e6, type: 3}
+  _pigTomatoPrompt: {fileID: 8300000, guid: 864a3f6ed18b16047b540a214908afdc, type: 3}
 --- !u!1 &927677245
 GameObject:
   m_ObjectHideFlags: 0
@@ -7750,6 +7758,9 @@ MonoBehaviour:
   - {fileID: 1311291670128596}
   - {fileID: 628015970}
   - {fileID: 937177207}
+  _chickenPrompt: {fileID: 8300000, guid: b1da41279a6d4b34781b6e3afcf2cdb5, type: 3}
+  _duckPrompt: {fileID: 8300000, guid: 3e6c79501b120fa4f8f9030c737807bb, type: 3}
+  _pigPrompt: {fileID: 8300000, guid: 4b199aa6c5594de4493a66be90bd0277, type: 3}
 --- !u!1 &1030682405
 GameObject:
   m_ObjectHideFlags: 0
@@ -10883,9 +10894,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1799452629}
-  - {fileID: 2005257999}
   - {fileID: 1840475323}
   - {fileID: 1388225042}
+  - {fileID: 2005257999}
   - {fileID: 1071522633}
   - {fileID: 1313621361}
   - {fileID: 605210663}
@@ -10920,6 +10931,15 @@ MonoBehaviour:
   - {fileID: 1999177615}
   - {fileID: 131272756}
   - {fileID: 1845101994}
+  _yellowRubberDuckPrompt: {fileID: 0}
+  _blueRubberDuckPrompt: {fileID: 8300000, guid: 015690601e9958444ad4e6fd7e54fff9, type: 3}
+  _redRubberDuckPrompt: {fileID: 8300000, guid: 6ea959c19726f3f4cb32a655490d3644, type: 3}
+  _purpleRubberDuckPrompt: {fileID: 8300000, guid: defdc48d53b821149915132ed9d3668f, type: 3}
+  _greenRubberDuckPrompt: {fileID: 8300000, guid: 1e293794cc050a743aea1de1059af26f, type: 3}
+  _orangeRubberDuckPrompt: {fileID: 8300000, guid: ab806f1a5205cca498b68cc79cf1f238, type: 3}
+  _pinkRubberDuckPrompt: {fileID: 8300000, guid: 9d59f658649549c44a700f36f4184dab, type: 3}
+  _whiteRubberDuckPrompt: {fileID: 8300000, guid: 72501d64c75c30349a45f8aa6d95a3f1, type: 3}
+  _blackRubberDuckPrompt: {fileID: 8300000, guid: fb3d9c6cc7a582a49ad3895c0a5224c1, type: 3}
 --- !u!82 &1420585495
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12515,6 +12535,7 @@ MonoBehaviour:
   _weapon: {fileID: 1843946519}
   _rightHandObject: {fileID: 723166155}
   _hittableObject: {fileID: 1779640028}
+  _flyPrompt: {fileID: 8300000, guid: d68d9cd8230a478438c64b77a2a6f151, type: 3}
 --- !u!82 &1607472699
 AudioSource:
   m_ObjectHideFlags: 0

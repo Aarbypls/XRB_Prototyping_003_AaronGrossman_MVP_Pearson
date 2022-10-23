@@ -7,9 +7,7 @@ namespace Minigames.Hit
 {
     public enum Type
     {
-        Fly = 1,
-        Ladybug = 2, 
-        Cockroach = 3
+        Fly = 1
     }
     
     public class Hit : MonoBehaviour
@@ -24,6 +22,9 @@ namespace Minigames.Hit
         [SerializeField] private GameObject _rightHandObject;
         [SerializeField] private GameObject _hittableObject;
 
+        [Header("Prompt")]
+        [SerializeField] private AudioClip _flyPrompt;
+        
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _success = false;
@@ -53,19 +54,12 @@ namespace Minigames.Hit
         {
             string instructions = String.Empty;
 
-            correctType = Type.Fly;
-            //SetCorrectType();
+            SetCorrectType();
 
             switch (correctType)
             {
                 case Type.Fly:
                     instructions = "Hit the Fly!";
-                    break;
-                case Type.Ladybug:
-                    instructions = "Hit the Ladybug!";
-                    break;
-                case Type.Cockroach:
-                    instructions = "Hit the Cockroach!";
                     break;
                 default:
                     Debug.Log("Hittable type not set correctly");
@@ -73,6 +67,23 @@ namespace Minigames.Hit
             }
             
             return instructions;
+        }
+
+        public AudioClip GetPromptAudioClip()
+        {
+            AudioClip audioClip = null;
+            
+            switch (correctType)
+            {
+                case Type.Fly:
+                    audioClip = _flyPrompt;
+                    break;
+                default:
+                    Debug.Log("Hittable type not set correctly");
+                    break;
+            }
+            
+            return audioClip;
         }
         
         private void OnEnable()

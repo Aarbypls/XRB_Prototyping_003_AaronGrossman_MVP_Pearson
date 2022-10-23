@@ -71,14 +71,17 @@ public class MinigameManager : MonoBehaviour
         if (nextMinigame.TryGetComponent(out Cut cut))
         {
             instructions = cut.SetObjectivesAndGetUIText();
+            _promptAudioSource.clip = cut.GetPromptAudioClip();            
         }
         else if (nextMinigame.TryGetComponent(out Slap slap))
         {
             instructions = slap.SetObjectivesAndGetUIText();
+            _promptAudioSource.clip = slap.GetPromptAudioClip();
         }
         else if (nextMinigame.TryGetComponent(out Hit hit))
         {
             instructions = hit.SetObjectivesAndGetUIText();
+            _promptAudioSource.clip = hit.GetPromptAudioClip();
         }
         else if (nextMinigame.TryGetComponent(out Shoot shoot))
         {
@@ -88,10 +91,12 @@ public class MinigameManager : MonoBehaviour
         else if (nextMinigame.TryGetComponent(out Feed feed))
         {
             instructions = feed.SetObjectivesAndGetUIText();
+            _promptAudioSource.clip = feed.GetPromptAudioClip();
         }
         else if (nextMinigame.TryGetComponent(out Pet pet))
         {
             instructions = pet.SetObjectivesAndGetUIText();
+            _promptAudioSource.clip = pet.GetPromptAudioClip();
         }
         
         _minigameInstructions.gameObject.SetActive(true);

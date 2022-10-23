@@ -26,6 +26,14 @@ namespace Minigames.Feed
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Food> _foodList;
         
+        [Header("Prompts")]
+        [SerializeField] private AudioClip _cowOrangePrompt;
+        [SerializeField] private AudioClip _cowPepperPrompt;
+        [SerializeField] private AudioClip _cowTomatoPrompt;
+        [SerializeField] private AudioClip _pigOrangePrompt;
+        [SerializeField] private AudioClip _pigPepperPrompt;
+        [SerializeField] private AudioClip _pigTomatoPrompt;
+
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _success = false;
@@ -88,6 +96,48 @@ namespace Minigames.Feed
             }
             
             return instructions;
+        }
+
+        public AudioClip GetPromptAudioClip()
+        {
+            AudioClip audioClip = null;
+
+            switch (_correctFeedableType)
+            {
+                case FeedableType.Cow:
+                    if (_correctFoodType == FoodType.Orange)
+                    {
+                        audioClip = _cowOrangePrompt;
+                    }
+                    else if (_correctFoodType == FoodType.Pepper)
+                    {
+                        audioClip = _cowPepperPrompt;
+                    }
+                    else if (_correctFoodType == FoodType.Tomato)
+                    {
+                        audioClip = _cowTomatoPrompt;
+                    }
+                    break;
+                case FeedableType.Pig:
+                    if (_correctFoodType == FoodType.Orange)
+                    {
+                        audioClip = _pigOrangePrompt;
+                    }
+                    else if (_correctFoodType == FoodType.Pepper)
+                    {
+                        audioClip = _pigPepperPrompt;
+                    }
+                    else if (_correctFoodType == FoodType.Tomato)
+                    {
+                        audioClip = _pigTomatoPrompt;
+                    }
+                    break;                    break;
+                default:
+                    Debug.Log("Feedable type not set correctly!");
+                    break;
+            }
+            
+            return audioClip;
         }
 
         private void OnEnable()

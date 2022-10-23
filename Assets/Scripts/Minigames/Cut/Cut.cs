@@ -22,7 +22,11 @@ namespace Minigames.Cut
         [SerializeField] private GameObject _sphere2;
         [SerializeField] private Transform _spawnPoint1;
         [SerializeField] private Transform _spawnPoint2;
-        
+
+        [Header("Prompts")]
+        [SerializeField] private AudioClip _redSpherePrompt;
+        [SerializeField] private AudioClip _blueSpherePrompt;
+
         private GameObject _spawned1;
         private GameObject _spawned2;
 
@@ -71,6 +75,26 @@ namespace Minigames.Cut
             }
 
             return instructions;
+        }
+
+        public AudioClip GetPromptAudioClip()
+        {
+            AudioClip audioClip = null;
+
+            switch (_correctCuttableType)
+            {
+                case CuttableType.BlueSphere:
+                    audioClip = _blueSpherePrompt;
+                    break;
+                case CuttableType.RedSphere:
+                    audioClip = _redSpherePrompt;
+                    break;
+                default:
+                    Debug.Log("Cuttable type not set correctly!");
+                    break;
+            }
+
+            return audioClip;
         }
         
         private void OnEnable()

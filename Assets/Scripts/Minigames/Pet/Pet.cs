@@ -19,6 +19,11 @@ namespace Minigames.Pet
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Pettable> _pettables;
 
+        [Header("Prompts")] 
+        [SerializeField] private AudioClip _chickenPrompt;
+        [SerializeField] private AudioClip _duckPrompt;
+        [SerializeField] private AudioClip _pigPrompt;        
+        
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _success = false;
@@ -67,6 +72,29 @@ namespace Minigames.Pet
             }
 
             return instructions;
+        }
+
+        public AudioClip GetPromptAudioClip()
+        {
+            AudioClip audioClip = null;
+
+            switch (_correctPettableType)
+            {
+                case PettableType.Chicken:
+                    audioClip = _chickenPrompt;
+                    break;
+                case PettableType.Duck:
+                    audioClip = _duckPrompt;
+                    break;
+                case PettableType.Pig:
+                    audioClip = _pigPrompt;
+                    break;
+                default:
+                    Debug.Log("Pettable type not set correctly!");
+                    break;
+            }
+            
+            return audioClip;
         }
         
         private void OnEnable()
