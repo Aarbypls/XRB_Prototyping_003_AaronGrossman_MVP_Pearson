@@ -11172,7 +11172,7 @@ MonoBehaviour:
   - {fileID: 1999177615}
   - {fileID: 131272756}
   - {fileID: 1845101994}
-  _yellowRubberDuckPrompt: {fileID: 0}
+  _yellowRubberDuckPrompt: {fileID: 8300000, guid: bd2e83d6ff902854695b7e3642fdc558, type: 3}
   _blueRubberDuckPrompt: {fileID: 8300000, guid: 015690601e9958444ad4e6fd7e54fff9, type: 3}
   _redRubberDuckPrompt: {fileID: 8300000, guid: 6ea959c19726f3f4cb32a655490d3644, type: 3}
   _purpleRubberDuckPrompt: {fileID: 8300000, guid: defdc48d53b821149915132ed9d3668f, type: 3}
