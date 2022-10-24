@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Minigames.Hit;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
 
 namespace Minigames.Slap
@@ -21,6 +22,8 @@ namespace Minigames.Slap
     
     public class Slap : MonoBehaviour
     {
+        [FormerlySerializedAs("_success")] public bool success = false;
+        
         [SerializeField] private MinigameManager _minigameManager;
         [SerializeField] private SlappableType _correctSlappableType;
         [SerializeField] private SFXManager _sfxManager;
@@ -39,7 +42,6 @@ namespace Minigames.Slap
 
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
-        private bool _success = false;
         private bool _ending = false;
 
         private void Update()
@@ -53,7 +55,7 @@ namespace Minigames.Slap
                 
                 // only play the failure clip if it HASN'T been played before
                 // (i.e., if they ran out of time without doing anything)
-                if (!_failureClipPlayed && !_success)
+                if (!_failureClipPlayed && !success)
                 {
                     _sfxManager.PlayFailureClip();
                 }
@@ -163,7 +165,7 @@ namespace Minigames.Slap
             }
 
             _minigameTimer = _minigameManager._globalGameTimer;
-            _success = false;
+            success = false;
             _ending = false;
         }
 
@@ -179,7 +181,6 @@ namespace Minigames.Slap
             if (slappableType == _correctSlappableType)
             {
                 _sfxManager.PlaySuccessClip();
-                _success = true;
                 _minigameTimer = 1f;                
             }
             else

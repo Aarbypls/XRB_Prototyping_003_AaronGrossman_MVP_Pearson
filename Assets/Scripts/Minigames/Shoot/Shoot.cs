@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = System.Random;
@@ -9,7 +11,12 @@ namespace Minigames.Shoot
     {
         Cat =  1,
         Dog = 2,
-        Chicken = 3
+        Chicken = 3,
+        Left = 4,
+        Middle = 5,
+        Right = 6,
+        Lowest = 7,
+        Highest = 8
     }
     
     public class Shoot : MonoBehaviour
@@ -23,11 +30,21 @@ namespace Minigames.Shoot
         [SerializeField] private GameObject _gun;
         [SerializeField] private GameObject _rightHandObject;
 
+        [Header("Shoot Types")] 
+        [SerializeField] private GameObject _animalType;
+        [SerializeField] private GameObject _position;
+        [SerializeField] private GameObject _height;
+
         [Header("Prompts")] 
         [SerializeField] private AudioClip _chickenPrompt;
         [SerializeField] private AudioClip _dogPrompt;
         [SerializeField] private AudioClip _catPrompt;
-        
+        [SerializeField] private AudioClip _leftPrompt;
+        [SerializeField] private AudioClip _middlePrompt;
+        [SerializeField] private AudioClip _rightPrompt;
+        [SerializeField] private AudioClip _lowestPrompt;
+        [SerializeField] private AudioClip _highestPrompt;
+
         private Vector3 _shootPointPosition;
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -78,6 +95,21 @@ namespace Minigames.Shoot
                 case ShootableType.Chicken:
                     instructions = "Shoot the chicken shaped hot air balloon!";
                     break;
+                case ShootableType.Left:
+                    instructions = "Shoot the balloon on the left!";
+                    break;
+                case ShootableType.Middle:
+                    instructions = "Shoot the balloon in the middle!";
+                    break;
+                case ShootableType.Right:
+                    instructions = "Shoot the balloon on the right!";
+                    break;
+                case ShootableType.Lowest:
+                    instructions = "Shoot the lowest hot air balloon!";
+                    break;
+                case ShootableType.Highest:
+                    instructions = "Shoot the highest hot air balloon!";
+                    break;
                 default:
                     Debug.Log("Shootable type not set correctly!");
                     break;
@@ -101,6 +133,21 @@ namespace Minigames.Shoot
                 case ShootableType.Chicken:
                     audioClip = _chickenPrompt;
                     break;
+                case ShootableType.Left:
+                    audioClip = _leftPrompt;
+                    break;
+                case ShootableType.Middle:
+                    audioClip = _middlePrompt;
+                    break;
+                case ShootableType.Right:
+                    audioClip = _rightPrompt;
+                    break;
+                case ShootableType.Lowest:
+                    audioClip = _lowestPrompt;
+                    break;
+                case ShootableType.Highest:
+                    audioClip = _highestPrompt;
+                    break;
                 default:
                     Debug.Log("Shootable type not set correctly!");
                     break;
@@ -119,9 +166,35 @@ namespace Minigames.Shoot
         
         private void InitializeStartingVariables()
         {
+            
+            if ((int)_correctShootableType > 0 && (int)_correctShootableType <= 3)
+            {
+                _animalType.SetActive(true);
+                SetChildShootablesActive(_animalType);
+            }
+            else if ((int)_correctShootableType >= 4 && (int)_correctShootableType <= 6)
+            {
+                _position.SetActive(true);
+                SetChildShootablesActive(_position);
+            }
+            else if ((int)_correctShootableType >= 7 && (int)_correctShootableType <= 8)
+            {
+                _height.SetActive(true);
+                SetChildShootablesActive(_height);
+            }
+            
             _minigameTimer = _minigameManager._globalGameTimer;
             _success = false;
             _ending = false;
+        }
+
+        private void SetChildShootablesActive(GameObject shootType)
+        {
+            List<Shootable> shootablesInShootType = shootType.GetComponentsInChildren<Shootable>().ToList();
+            foreach (Shootable shootable in shootablesInShootType)
+            {
+                shootable.gameObject.SetActive(true);
+            }
         }
 
         private void SetCorrectShootableType()
@@ -150,6 +223,11 @@ namespace Minigames.Shoot
             _minigameManager.StartNextMinigame();
             _gun.SetActive(false);
             _rightHandObject.SetActive(true);
+            
+            _animalType.SetActive(false);
+            _position.SetActive(false);
+            _height.SetActive(false);
+            
             this.gameObject.SetActive(false);
         }
         

@@ -44,7 +44,8 @@ namespace Minigames.Slap
                 
                 _animalSound.Play();
                 _slapSound.Play();
-                
+
+                _slap.success = true;
                 Invoke(nameof(RegisterSlap), 2f);
             }
         }

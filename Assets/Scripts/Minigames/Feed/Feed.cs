@@ -131,7 +131,7 @@ namespace Minigames.Feed
                     {
                         audioClip = _pigTomatoPrompt;
                     }
-                    break;                    break;
+                    break;
                 default:
                     Debug.Log("Feedable type not set correctly!");
                     break;
