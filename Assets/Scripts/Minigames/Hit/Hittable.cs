@@ -12,7 +12,7 @@ namespace Minigames.Hit
         [SerializeField] private Hit _hit;
         [FormerlySerializedAs("_nailType")] [SerializeField] private Type type;
 
-        [SerializeField] private Image _splatter;
+        [SerializeField] private GameObject _splatter;
         [SerializeField] private GameObject _squashedFly;
         //[SerializeField] private Transform _endPoint;
 
@@ -21,9 +21,9 @@ namespace Minigames.Hit
         private void OnEnable()
         {
             _beenHit = false;
-            gameObject.SetActive(true);
-            _splatter.enabled = false;
+            _splatter.SetActive(false);
             _squashedFly.SetActive(false);
+            gameObject.SetActive(true);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -36,13 +36,10 @@ namespace Minigames.Hit
             if (other.gameObject.CompareTag("Weapon"))
             {
                 _beenHit = true;
-
-                _hit.RegisterHit(type);
-
-                gameObject.SetActive(false);
-                _splatter.enabled = true;
+                _splatter.SetActive(true);
                 _squashedFly.SetActive(true);
-
+                _hit.RegisterHit(type);
+                gameObject.SetActive(false);
             }
         }
     }

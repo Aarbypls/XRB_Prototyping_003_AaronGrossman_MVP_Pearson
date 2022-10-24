@@ -16,7 +16,6 @@ namespace Minigames.Hit
         [FormerlySerializedAs("_correctNailType")] [SerializeField] private Type correctType;
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private AudioSource _hitAudioSource;
-        [SerializeField] private AudioClip _surfaceHitSFX;
         [FormerlySerializedAs("_nailHitSFX")] [SerializeField] private AudioClip _hitSFX;
         [FormerlySerializedAs("_hammer")] [SerializeField] private GameObject _weapon;
         [SerializeField] private GameObject _rightHandObject;
