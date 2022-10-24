@@ -7392,6 +7392,9 @@ MonoBehaviour:
   _pigOrangePrompt: {fileID: 8300000, guid: 9dccffb1f26c8d7498aa0d49d8dcae47, type: 3}
   _pigPepperPrompt: {fileID: 8300000, guid: 6b0f651e5c901ad4898ce900d25633e6, type: 3}
   _pigTomatoPrompt: {fileID: 8300000, guid: 864a3f6ed18b16047b540a214908afdc, type: 3}
+  _selfOrangePrompt: {fileID: 8300000, guid: cfaee1f5e2e266f43aad9179807759b9, type: 3}
+  _selfPepperPrompt: {fileID: 8300000, guid: fe42943e6509ab2418ff65ab0b27f8b3, type: 3}
+  _selfTomatoPrompt: {fileID: 8300000, guid: ca34106646598014bb94861a4eca5f83, type: 3}
 --- !u!1001 &913452965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11974,6 +11977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a400d96e3fba7547b509a6063229f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  success: 0
   _minigameManager: {fileID: 2094089061}
   _correctSlappableType: 0
   _sfxManager: {fileID: 859803033}
@@ -15818,6 +15822,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c74c2638f3925488c81ab9381b0d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1829468684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7886103240559735228, guid: 4397f8e3748bad04ebbf7d0b1c84106a, type: 3}
+  m_PrefabInstance: {fileID: 723166153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1829468685
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829468684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1829468686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829468684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd406581fb45eb40a88ea66e764e8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _feedableType: 3
+  _feed: {fileID: 903632309}
 --- !u!1 &1836733473
 GameObject:
   m_ObjectHideFlags: 0
@@ -19359,8 +19395,7 @@ MonoBehaviour:
   _globalGameTimer: 8
   _globalEndOfGameTimer: 0.1
   _minigames:
-  - {fileID: 1352276814}
-  - {fileID: 1420585492}
+  - {fileID: 903632307}
   _minigameInstructions: {fileID: 135059147}
   _promptAudioSource: {fileID: 1670287277}
 --- !u!1 &2094205995

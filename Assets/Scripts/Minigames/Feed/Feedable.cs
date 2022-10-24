@@ -13,7 +13,11 @@ namespace Minigames.Feed
             if (other.gameObject.TryGetComponent(out Food food))
             {
                 other.gameObject.SetActive(false);
-                _feed.RegisterFoodAndFeedable(food.GetFoodType(), _feedableType);
+
+                if (_feed.gameObject.activeSelf)
+                {
+                    _feed.RegisterFoodAndFeedable(food.GetFoodType(), _feedableType);
+                }
             }
         }
     }

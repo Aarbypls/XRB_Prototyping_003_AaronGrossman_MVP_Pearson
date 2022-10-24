@@ -8,7 +8,8 @@ namespace Minigames.Feed
     public enum FeedableType
     {
         Pig = 1,
-        Cow = 2
+        Cow = 2,
+        Self = 3
     }
 
     public enum FoodType
@@ -33,7 +34,10 @@ namespace Minigames.Feed
         [SerializeField] private AudioClip _pigOrangePrompt;
         [SerializeField] private AudioClip _pigPepperPrompt;
         [SerializeField] private AudioClip _pigTomatoPrompt;
-
+        [SerializeField] private AudioClip _selfOrangePrompt;
+        [SerializeField] private AudioClip _selfPepperPrompt;
+        [SerializeField] private AudioClip _selfTomatoPrompt;
+        
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _success = false;
@@ -73,6 +77,9 @@ namespace Minigames.Feed
                     break;
                 case FeedableType.Pig:
                     instructions = "Feed the pig the ";
+                    break;
+                case FeedableType.Self:
+                    instructions = "Feed yourself the ";
                     break;
                 default:
                     Debug.Log("Feedable type not set correctly!");
@@ -130,6 +137,20 @@ namespace Minigames.Feed
                     else if (_correctFoodType == FoodType.Tomato)
                     {
                         audioClip = _pigTomatoPrompt;
+                    }
+                    break;
+                case FeedableType.Self:
+                    if (_correctFoodType == FoodType.Orange)
+                    {
+                        audioClip = _selfOrangePrompt;
+                    }
+                    else if (_correctFoodType == FoodType.Pepper)
+                    {
+                        audioClip = _selfPepperPrompt;
+                    }
+                    else if (_correctFoodType == FoodType.Tomato)
+                    {
+                        audioClip = _selfTomatoPrompt;
                     }
                     break;
                 default:
