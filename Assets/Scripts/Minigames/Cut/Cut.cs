@@ -64,10 +64,10 @@ namespace Minigames.Cut
             switch (_correctCuttableType)
             {
                 case CuttableType.SoccerBall:
-                    instructions = "Cut the Soccer ball!";
+                    instructions = "Cut the soccer ball!";
                     break;
                 case CuttableType.BasketBall:
-                    instructions = "Cut the Basketball!";
+                    instructions = "Cut the basketball!";
                     break;
                 default:
                     Debug.Log("Cuttable type not set correctly!");
