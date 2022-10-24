@@ -7386,15 +7386,15 @@ MonoBehaviour:
   - {fileID: 410463274}
   - {fileID: 1767268884}
   - {fileID: 1387648110}
-  _cowOrangePrompt: {fileID: 8300000, guid: 003b6c4568d8a344b997fc1b133f7ae0, type: 3}
-  _cowPepperPrompt: {fileID: 8300000, guid: 45cc3fdb6e8ea8d479910eebe286e9ae, type: 3}
-  _cowTomatoPrompt: {fileID: 8300000, guid: 6b3addebe90ae57429de00f1f30fcaf1, type: 3}
-  _pigOrangePrompt: {fileID: 8300000, guid: 9dccffb1f26c8d7498aa0d49d8dcae47, type: 3}
-  _pigPepperPrompt: {fileID: 8300000, guid: 6b0f651e5c901ad4898ce900d25633e6, type: 3}
-  _pigTomatoPrompt: {fileID: 8300000, guid: 864a3f6ed18b16047b540a214908afdc, type: 3}
-  _selfOrangePrompt: {fileID: 8300000, guid: cfaee1f5e2e266f43aad9179807759b9, type: 3}
-  _selfPepperPrompt: {fileID: 8300000, guid: fe42943e6509ab2418ff65ab0b27f8b3, type: 3}
-  _selfTomatoPrompt: {fileID: 8300000, guid: ca34106646598014bb94861a4eca5f83, type: 3}
+  _cowOrangePrompt: {fileID: 8300000, guid: 0b2f10ade97bb66479e2035bcef15f7b, type: 3}
+  _cowPepperPrompt: {fileID: 8300000, guid: cbee124b1cad2e8459693504ff46a628, type: 3}
+  _cowTomatoPrompt: {fileID: 8300000, guid: f34969cdfd0302948bd5f290c0b0c578, type: 3}
+  _pigOrangePrompt: {fileID: 8300000, guid: d97711b2b0fc57b4c9f8265a744d3cc3, type: 3}
+  _pigPepperPrompt: {fileID: 8300000, guid: 96123059738483446b7a72d46b086c32, type: 3}
+  _pigTomatoPrompt: {fileID: 8300000, guid: 4b5bef3e20e267d40b986b104c5ff991, type: 3}
+  _selfOrangePrompt: {fileID: 8300000, guid: ec8cb3cd6f89a0242bb0bd5b495de8cc, type: 3}
+  _selfPepperPrompt: {fileID: 8300000, guid: 6f142f89e9cbba746870c8de45a9c469, type: 3}
+  _selfTomatoPrompt: {fileID: 8300000, guid: df3e053d380d4ee48926237e7ffd705c, type: 3}
 --- !u!1001 &913452965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11257,11 +11257,11 @@ MonoBehaviour:
   _chickenPrompt: {fileID: 8300000, guid: 90c69641dcb4d8f47af3d636055cd31c, type: 3}
   _dogPrompt: {fileID: 8300000, guid: aa699ed1a5946a444a41d3f3d4a10ee4, type: 3}
   _catPrompt: {fileID: 8300000, guid: a1ee34f5f2a97e1489587b224278a917, type: 3}
-  _leftPrompt: {fileID: 8300000, guid: 0bd8c48700d0a7842b9194066aff9ddb, type: 3}
-  _middlePrompt: {fileID: 8300000, guid: 8c4fbcdf27bf8dc4ca5fd555980fcdb3, type: 3}
-  _rightPrompt: {fileID: 8300000, guid: 818f12ea4745ae84a85135e653b7ccd4, type: 3}
-  _lowestPrompt: {fileID: 8300000, guid: d49cc31da2027a947a03c60bc4b271ef, type: 3}
-  _highestPrompt: {fileID: 8300000, guid: 583718cf1a3b58f4a92a30677bb06c6d, type: 3}
+  _leftPrompt: {fileID: 8300000, guid: ec7af73ad00d34a47ada4604d7a2fa26, type: 3}
+  _middlePrompt: {fileID: 8300000, guid: f0b0f162aa5572b418070128d5b1334a, type: 3}
+  _rightPrompt: {fileID: 8300000, guid: eb1edffb075d7a74e9672653e0efd511, type: 3}
+  _lowestPrompt: {fileID: 8300000, guid: e7bcbf23499cdcb4e9bcf72587d4f8ec, type: 3}
+  _highestPrompt: {fileID: 8300000, guid: 54999fe0aba325c44b065611e9929fab, type: 3}
 --- !u!82 &1352276817
 AudioSource:
   m_ObjectHideFlags: 0
