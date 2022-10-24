@@ -166,21 +166,20 @@ namespace Minigames.Shoot
         
         private void InitializeStartingVariables()
         {
-            
-            if ((int)_correctShootableType > 0 && (int)_correctShootableType <= 3)
+            if ((int)_correctShootableType >= 1 && (int)_correctShootableType <= 3)
             {
+                SetChildShootablesActiveStatus(_animalType, true);
                 _animalType.SetActive(true);
-                SetChildShootablesActive(_animalType);
             }
             else if ((int)_correctShootableType >= 4 && (int)_correctShootableType <= 6)
             {
+                SetChildShootablesActiveStatus(_position, true);
                 _position.SetActive(true);
-                SetChildShootablesActive(_position);
             }
             else if ((int)_correctShootableType >= 7 && (int)_correctShootableType <= 8)
             {
+                SetChildShootablesActiveStatus(_height, true);
                 _height.SetActive(true);
-                SetChildShootablesActive(_height);
             }
             
             _minigameTimer = _minigameManager._globalGameTimer;
@@ -188,12 +187,17 @@ namespace Minigames.Shoot
             _ending = false;
         }
 
-        private void SetChildShootablesActive(GameObject shootType)
+        private void SetChildShootablesActiveStatus(GameObject shootType, bool isActive)
         {
-            List<Shootable> shootablesInShootType = shootType.GetComponentsInChildren<Shootable>().ToList();
+            List<Shootable> shootablesInShootType = shootType.GetComponentsInChildren<Shootable>(true).ToList();
             foreach (Shootable shootable in shootablesInShootType)
             {
-                shootable.gameObject.SetActive(true);
+                if (isActive)
+                {
+                    shootable.DisableConfetti();
+                }
+                
+                shootable.gameObject.SetActive(isActive);
             }
         }
 
@@ -212,7 +216,7 @@ namespace Minigames.Shoot
             {
                 if (hit.collider.gameObject.TryGetComponent(out Shootable shootable))
                 {
-                    shootable.HideAndShootConfetti();
+                    shootable.HideAndShootConfetti(_correctShootableType);
                     RegisterShot(shootable._shootableType);
                 }
             }
@@ -224,6 +228,10 @@ namespace Minigames.Shoot
             _gun.SetActive(false);
             _rightHandObject.SetActive(true);
             
+            SetChildShootablesActiveStatus(_animalType, true);
+            SetChildShootablesActiveStatus(_position, true);
+            SetChildShootablesActiveStatus(_height, true);
+
             _animalType.SetActive(false);
             _position.SetActive(false);
             _height.SetActive(false);

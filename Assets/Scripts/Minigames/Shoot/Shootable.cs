@@ -7,10 +7,19 @@ namespace Minigames.Shoot
     {
         public ShootableType _shootableType;
         public GameObject _confettiObject;
-        
-        public void HideAndShootConfetti()
+
+        public void DisableConfetti()
         {
-            _confettiObject.SetActive(true);
+            _confettiObject.SetActive(false);
+        }
+
+        public void HideAndShootConfetti(ShootableType correctShootableType)
+        {
+            if (correctShootableType == _shootableType)
+            {
+                _confettiObject.SetActive(true);
+            }
+            
             gameObject.SetActive(false);
         }
     }
