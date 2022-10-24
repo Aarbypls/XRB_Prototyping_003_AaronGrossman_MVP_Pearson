@@ -7,8 +7,8 @@ namespace Minigames.Cut
 {
     public enum CuttableType
     {
-        RedSphere = 1,
-        BlueSphere = 2
+        BasketBall = 1,
+        SoccerBall = 2
     }
     
     public class Cut : MonoBehaviour
@@ -24,8 +24,8 @@ namespace Minigames.Cut
         [SerializeField] private Transform _spawnPoint2;
 
         [Header("Prompts")]
-        [SerializeField] private AudioClip _redSpherePrompt;
-        [SerializeField] private AudioClip _blueSpherePrompt;
+        [SerializeField] private AudioClip _basketBallPrompt;
+        [SerializeField] private AudioClip _soccerBallPrompt;
 
         private GameObject _spawned1;
         private GameObject _spawned2;
@@ -63,11 +63,11 @@ namespace Minigames.Cut
 
             switch (_correctCuttableType)
             {
-                case CuttableType.BlueSphere:
-                    instructions = "Cut the blue sphere!";
+                case CuttableType.SoccerBall:
+                    instructions = "Cut the Soccer ball!";
                     break;
-                case CuttableType.RedSphere:
-                    instructions = "Cut the red sphere!";
+                case CuttableType.BasketBall:
+                    instructions = "Cut the Basketball!";
                     break;
                 default:
                     Debug.Log("Cuttable type not set correctly!");
@@ -83,11 +83,11 @@ namespace Minigames.Cut
 
             switch (_correctCuttableType)
             {
-                case CuttableType.BlueSphere:
-                    audioClip = _blueSpherePrompt;
+                case CuttableType.SoccerBall:
+                    audioClip = _soccerBallPrompt;
                     break;
-                case CuttableType.RedSphere:
-                    audioClip = _redSpherePrompt;
+                case CuttableType.BasketBall:
+                    audioClip = _basketBallPrompt;
                     break;
                 default:
                     Debug.Log("Cuttable type not set correctly!");

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7890936013343636434}
   - component: {fileID: 7278590879130080788}
   m_Layer: 3
-  m_Name: RedSphere
+  m_Name: Basketball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
