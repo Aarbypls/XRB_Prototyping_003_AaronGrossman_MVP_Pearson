@@ -7,7 +7,8 @@ namespace Minigames.Feed
     {
         [SerializeField] private FeedableType _feedableType;
         [SerializeField] private Feed _feed;
-
+        [SerializeField] private AudioSource _fedSound;
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out Food food))
@@ -16,6 +17,11 @@ namespace Minigames.Feed
 
                 if (_feed.gameObject.activeSelf)
                 {
+                    if (food.GetFoodType() == _feed.correctFoodType)
+                    {
+                        _fedSound.Play();
+                    }
+                    
                     _feed.RegisterFoodAndFeedable(food.GetFoodType(), _feedableType);
                 }
             }

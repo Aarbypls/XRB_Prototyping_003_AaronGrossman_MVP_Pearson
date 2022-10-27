@@ -21,9 +21,10 @@ namespace Minigames.Feed
     
     public class Feed : MonoBehaviour
     {
+        public FoodType correctFoodType;
+        
         [SerializeField] private MinigameManager _minigameManager;
         [SerializeField] private FeedableType _correctFeedableType;
-        [SerializeField] private FoodType _correctFoodType;
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Food> _foodList;
         
@@ -100,7 +101,7 @@ namespace Minigames.Feed
                             break;
                     }
             
-                    switch (_correctFoodType)
+                    switch (correctFoodType)
                     {
                         case FoodType.Orange:
                             instructions += "orange!";
@@ -126,7 +127,7 @@ namespace Minigames.Feed
                             instructions = "¡Alimenta al cerdo ";
                             break;
                         case FeedableType.Self:
-                            switch (_correctFoodType)
+                            switch (correctFoodType)
                             {
                                 case FoodType.Orange:
                                     instructions = "¡Come la naranja!";
@@ -147,7 +148,7 @@ namespace Minigames.Feed
                     // Need this logic due to the grammatical nature of Spanish
                     if (_correctFeedableType != FeedableType.Self)
                     {
-                        switch (_correctFoodType)
+                        switch (correctFoodType)
                         {
                             case FoodType.Orange:
                                 instructions += "con la naranja!";
@@ -182,43 +183,43 @@ namespace Minigames.Feed
                     switch (_correctFeedableType)
                     {
                         case FeedableType.Cow:
-                            if (_correctFoodType == FoodType.Orange)
+                            if (correctFoodType == FoodType.Orange)
                             {
                                 audioClip = _cowOrangePromptEnglish;
                             }
-                            else if (_correctFoodType == FoodType.Pepper)
+                            else if (correctFoodType == FoodType.Pepper)
                             {
                                 audioClip = _cowPepperPromptEnglish;
                             }
-                            else if (_correctFoodType == FoodType.Tomato)
+                            else if (correctFoodType == FoodType.Tomato)
                             {
                                 audioClip = _cowTomatoPromptEnglish;
                             }
                             break;
                         case FeedableType.Pig:
-                            if (_correctFoodType == FoodType.Orange)
+                            if (correctFoodType == FoodType.Orange)
                             {
                                 audioClip = _pigOrangePromptEnglish;
                             }
-                            else if (_correctFoodType == FoodType.Pepper)
+                            else if (correctFoodType == FoodType.Pepper)
                             {
                                 audioClip = _pigPepperPromptEnglish;
                             }
-                            else if (_correctFoodType == FoodType.Tomato)
+                            else if (correctFoodType == FoodType.Tomato)
                             {
                                 audioClip = _pigTomatoPromptEnglish;
                             }
                             break;
                         case FeedableType.Self:
-                            if (_correctFoodType == FoodType.Orange)
+                            if (correctFoodType == FoodType.Orange)
                             {
                                 audioClip = _selfOrangePromptEnglish;
                             }
-                            else if (_correctFoodType == FoodType.Pepper)
+                            else if (correctFoodType == FoodType.Pepper)
                             {
                                 audioClip = _selfPepperPromptEnglish;
                             }
-                            else if (_correctFoodType == FoodType.Tomato)
+                            else if (correctFoodType == FoodType.Tomato)
                             {
                                 audioClip = _selfTomatoPromptEnglish;
                             }
@@ -232,43 +233,43 @@ namespace Minigames.Feed
                     switch (_correctFeedableType)
                     {
                         case FeedableType.Cow:
-                            if (_correctFoodType == FoodType.Orange)
+                            if (correctFoodType == FoodType.Orange)
                             {
                                 audioClip = _cowOrangePromptSpanish;
                             }
-                            else if (_correctFoodType == FoodType.Pepper)
+                            else if (correctFoodType == FoodType.Pepper)
                             {
                                 audioClip = _cowPepperPromptSpanish;
                             }
-                            else if (_correctFoodType == FoodType.Tomato)
+                            else if (correctFoodType == FoodType.Tomato)
                             {
                                 audioClip = _cowTomatoPromptSpanish;
                             }
                             break;
                         case FeedableType.Pig:
-                            if (_correctFoodType == FoodType.Orange)
+                            if (correctFoodType == FoodType.Orange)
                             {
                                 audioClip = _pigOrangePromptSpanish;
                             }
-                            else if (_correctFoodType == FoodType.Pepper)
+                            else if (correctFoodType == FoodType.Pepper)
                             {
                                 audioClip = _pigPepperPromptSpanish;
                             }
-                            else if (_correctFoodType == FoodType.Tomato)
+                            else if (correctFoodType == FoodType.Tomato)
                             {
                                 audioClip = _pigTomatoPromptSpanish;
                             }
                             break;
                         case FeedableType.Self:
-                            if (_correctFoodType == FoodType.Orange)
+                            if (correctFoodType == FoodType.Orange)
                             {
                                 audioClip = _selfOrangePromptSpanish;
                             }
-                            else if (_correctFoodType == FoodType.Pepper)
+                            else if (correctFoodType == FoodType.Pepper)
                             {
                                 audioClip = _selfPepperPromptSpanish;
                             }
-                            else if (_correctFoodType == FoodType.Tomato)
+                            else if (correctFoodType == FoodType.Tomato)
                             {
                                 audioClip = _selfTomatoPromptSpanish;
                             }
@@ -321,7 +322,7 @@ namespace Minigames.Feed
         {
             Array types = Enum.GetValues(typeof(FoodType));
             Random random = new Random();
-            _correctFoodType = (FoodType)types.GetValue(random.Next(types.Length));
+            correctFoodType = (FoodType)types.GetValue(random.Next(types.Length));
         }
         
         private void EndGame()
@@ -332,7 +333,7 @@ namespace Minigames.Feed
 
         public void RegisterFoodAndFeedable(FoodType foodType, FeedableType feedableType)
         {
-            if (foodType == _correctFoodType && feedableType == _correctFeedableType)
+            if (foodType == correctFoodType && feedableType == _correctFeedableType)
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;

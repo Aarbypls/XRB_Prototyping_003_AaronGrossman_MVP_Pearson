@@ -8,6 +8,7 @@ namespace Minigames.Pet
         public PettableType _pettableType;
         
         [SerializeField] private Pet _pet;
+        [SerializeField] private AudioSource _animalSound;
         
         private Vector3 _lastLeftHandPosition;
         private Vector3 _lastRightHandPosition;
@@ -71,6 +72,7 @@ namespace Minigames.Pet
 
             if (_totalPetDistance >= _requiredPettingDistance)
             {
+                _animalSound.Play();
                 _finishedPetting = true;
                 _pet.RegisterPet(_pettableType);
             }
