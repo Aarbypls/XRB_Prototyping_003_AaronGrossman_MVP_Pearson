@@ -17,7 +17,8 @@ namespace Minigames.Feed
 
                 if (_feed.gameObject.activeSelf)
                 {
-                    if (food.GetFoodType() == _feed.correctFoodType)
+                    if (food.GetFoodType() == _feed.correctFoodType &&
+                    _feedableType == _feed.correctFeedableType)
                     {
                         _fedSound.Play();
                     }

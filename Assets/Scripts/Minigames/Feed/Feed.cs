@@ -22,9 +22,9 @@ namespace Minigames.Feed
     public class Feed : MonoBehaviour
     {
         public FoodType correctFoodType;
-        
+        public FeedableType correctFeedableType;
+
         [SerializeField] private MinigameManager _minigameManager;
-        [SerializeField] private FeedableType _correctFeedableType;
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Food> _foodList;
         
@@ -85,7 +85,7 @@ namespace Minigames.Feed
             switch (_minigameManager.language)
             {
                 case Language.English:
-                    switch (_correctFeedableType)
+                    switch (correctFeedableType)
                     {
                         case FeedableType.Cow:
                             instructions = "Feed the cow the ";
@@ -118,7 +118,7 @@ namespace Minigames.Feed
                     }
                     break;
                 case Language.Spanish:
-                    switch (_correctFeedableType)
+                    switch (correctFeedableType)
                     {
                         case FeedableType.Cow:
                             instructions = "¡Alimenta a la vaca ";
@@ -146,7 +146,7 @@ namespace Minigames.Feed
                     }
 
                     // Need this logic due to the grammatical nature of Spanish
-                    if (_correctFeedableType != FeedableType.Self)
+                    if (correctFeedableType != FeedableType.Self)
                     {
                         switch (correctFoodType)
                         {
@@ -180,7 +180,7 @@ namespace Minigames.Feed
             switch (_minigameManager.language)
             {
                 case Language.English:
-                    switch (_correctFeedableType)
+                    switch (correctFeedableType)
                     {
                         case FeedableType.Cow:
                             if (correctFoodType == FoodType.Orange)
@@ -230,7 +230,7 @@ namespace Minigames.Feed
                     }
                     break;
                 case Language.Spanish:
-                    switch (_correctFeedableType)
+                    switch (correctFeedableType)
                     {
                         case FeedableType.Cow:
                             if (correctFoodType == FoodType.Orange)
@@ -315,7 +315,7 @@ namespace Minigames.Feed
         {
             Array types = Enum.GetValues(typeof(FeedableType));
             Random random = new Random();
-            _correctFeedableType = (FeedableType)types.GetValue(random.Next(types.Length));
+            correctFeedableType = (FeedableType)types.GetValue(random.Next(types.Length));
         }
 
         private void SetCorrectFoodType()
@@ -333,7 +333,7 @@ namespace Minigames.Feed
 
         public void RegisterFoodAndFeedable(FoodType foodType, FeedableType feedableType)
         {
-            if (foodType == correctFoodType && feedableType == _correctFeedableType)
+            if (foodType == correctFoodType && feedableType == correctFeedableType)
             {
                 _sfxManager.PlaySuccessClip();
                 _success = true;
