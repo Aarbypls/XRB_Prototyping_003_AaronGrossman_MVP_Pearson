@@ -19,10 +19,15 @@ namespace Minigames.Pet
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Pettable> _pettables;
 
-        [Header("Prompts")] 
-        [SerializeField] private AudioClip _chickenPrompt;
-        [SerializeField] private AudioClip _duckPrompt;
-        [SerializeField] private AudioClip _pigPrompt;        
+        [Header("English Prompts")] 
+        [SerializeField] private AudioClip _chickenPromptEnglish;
+        [SerializeField] private AudioClip _duckPromptEnglish;
+        [SerializeField] private AudioClip _pigPromptEnglish;
+        
+        [Header("Spanish Prompts")] 
+        [SerializeField] private AudioClip _chickenPromptSpanish;
+        [SerializeField] private AudioClip _duckPromptSpanish;
+        [SerializeField] private AudioClip _pigPromptSpanish;  
         
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -45,7 +50,7 @@ namespace Minigames.Pet
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
+                Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
         
@@ -55,20 +60,45 @@ namespace Minigames.Pet
 
             SetCorrectPettableType();
 
-            switch (_correctPettableType)
+            switch (_minigameManager.language)
             {
-                case PettableType.Chicken:
-                    instructions = "Pet the chicken!";
+                case Language.English:
+                    switch (_correctPettableType)
+                    {
+                        case PettableType.Chicken:
+                            instructions = "Pet the chicken!";
+                            break;
+                        case PettableType.Duck:
+                            instructions = "Pet the duck!";
+                            break;
+                        case PettableType.Pig:
+                            instructions = "Pet the pig!";
+                            break;
+                        default:
+                            Debug.Log("Pettable type not set correctly!");
+                            break;
+                    }
                     break;
-                case PettableType.Duck:
-                    instructions = "Pet the duck!";
-                    break;
-                case PettableType.Pig:
-                    instructions = "Pet the pig!";
+                case Language.Spanish:
+                    switch (_correctPettableType)
+                    {
+                        case PettableType.Chicken:
+                            instructions = "¡Acaricia el pollo!";
+                            break;
+                        case PettableType.Duck:
+                            instructions = "¡Acaricia al pato!";
+                            break;
+                        case PettableType.Pig:
+                            instructions = "¡Acaricia al cerdo!";
+                            break;
+                        default:
+                            Debug.Log("Pettable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Pettable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
 
             return instructions;
@@ -78,22 +108,47 @@ namespace Minigames.Pet
         {
             AudioClip audioClip = null;
 
-            switch (_correctPettableType)
+            switch (_minigameManager.language)
             {
-                case PettableType.Chicken:
-                    audioClip = _chickenPrompt;
+                case Language.English:
+                    switch (_correctPettableType)
+                    {
+                        case PettableType.Chicken:
+                            audioClip = _chickenPromptEnglish;
+                            break;
+                        case PettableType.Duck:
+                            audioClip = _duckPromptEnglish;
+                            break;
+                        case PettableType.Pig:
+                            audioClip = _pigPromptEnglish;
+                            break;
+                        default:
+                            Debug.Log("Pettable type not set correctly!");
+                            break;
+                    }
                     break;
-                case PettableType.Duck:
-                    audioClip = _duckPrompt;
-                    break;
-                case PettableType.Pig:
-                    audioClip = _pigPrompt;
+                case Language.Spanish:
+                    switch (_correctPettableType)
+                    {
+                        case PettableType.Chicken:
+                            audioClip = _chickenPromptSpanish;
+                            break;
+                        case PettableType.Duck:
+                            audioClip = _duckPromptSpanish;
+                            break;
+                        case PettableType.Pig:
+                            audioClip = _pigPromptSpanish;
+                            break;
+                        default:
+                            Debug.Log("Pettable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Pettable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
-            
+
             return audioClip;
         }
         
@@ -113,7 +168,7 @@ namespace Minigames.Pet
                 }
             }
             
-            _minigameTimer = _minigameManager._globalGameTimer;
+            _minigameTimer = _minigameManager.globalGameTimer;
             _success = false;
             _ending = false;
         }

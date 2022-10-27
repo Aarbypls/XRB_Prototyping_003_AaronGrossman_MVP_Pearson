@@ -21,8 +21,11 @@ namespace Minigames.Hit
         [SerializeField] private GameObject _rightHandObject;
         [SerializeField] private GameObject _hittableObject;
 
-        [Header("Prompt")]
-        [SerializeField] private AudioClip _flyPrompt;
+        [Header("English Prompt")]
+        [SerializeField] private AudioClip _flyPromptEnglish;
+        
+        [Header("Spanish Prompt")]
+        [SerializeField] private AudioClip _flyPromptSpanish;
         
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -45,7 +48,7 @@ namespace Minigames.Hit
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
+                Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
 
@@ -55,16 +58,35 @@ namespace Minigames.Hit
 
             SetCorrectType();
 
-            switch (correctType)
+            switch (_minigameManager.language)
             {
-                case Type.Fly:
-                    instructions = "Hit the Fly!";
+                case Language.English:
+                    switch (correctType)
+                    {
+                        case Type.Fly:
+                            instructions = "Hit the fly!";
+                            break;
+                        default:
+                            Debug.Log("Hittable type not set correctly");
+                            break;
+                    }
+                    break;
+                case Language.Spanish:
+                    switch (correctType)
+                    {
+                        case Type.Fly:
+                            instructions = "¡Aplasta la mosca!";
+                            break;
+                        default:
+                            Debug.Log("Hittable type not set correctly");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Hittable type not set correctly");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
-            
+
             return instructions;
         }
 
@@ -72,16 +94,35 @@ namespace Minigames.Hit
         {
             AudioClip audioClip = null;
             
-            switch (correctType)
+            switch (_minigameManager.language)
             {
-                case Type.Fly:
-                    audioClip = _flyPrompt;
+                case Language.English:
+                    switch (correctType)
+                    {
+                        case Type.Fly:
+                            audioClip = _flyPromptEnglish;
+                            break;
+                        default:
+                            Debug.Log("Hittable type not set correctly");
+                            break;
+                    }
+                    break;
+                case Language.Spanish:
+                    switch (correctType)
+                    {
+                        case Type.Fly:
+                            audioClip = _flyPromptSpanish;
+                            break;
+                        default:
+                            Debug.Log("Hittable type not set correctly");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Hittable type not set correctly");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
-            
+
             return audioClip;
         }
         
@@ -96,7 +137,7 @@ namespace Minigames.Hit
         private void InitializeStartingVariables()
         {
             _hittableObject.SetActive(true);
-            _minigameTimer = _minigameManager._globalGameTimer;
+            _minigameTimer = _minigameManager.globalGameTimer;
             _success = false;
             _ending = false;
         }

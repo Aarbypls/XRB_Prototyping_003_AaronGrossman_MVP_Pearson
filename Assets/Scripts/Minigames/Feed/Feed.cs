@@ -27,16 +27,27 @@ namespace Minigames.Feed
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Food> _foodList;
         
-        [Header("Prompts")]
-        [SerializeField] private AudioClip _cowOrangePrompt;
-        [SerializeField] private AudioClip _cowPepperPrompt;
-        [SerializeField] private AudioClip _cowTomatoPrompt;
-        [SerializeField] private AudioClip _pigOrangePrompt;
-        [SerializeField] private AudioClip _pigPepperPrompt;
-        [SerializeField] private AudioClip _pigTomatoPrompt;
-        [SerializeField] private AudioClip _selfOrangePrompt;
-        [SerializeField] private AudioClip _selfPepperPrompt;
-        [SerializeField] private AudioClip _selfTomatoPrompt;
+        [Header("English Prompts")]
+        [SerializeField] private AudioClip _cowOrangePromptEnglish;
+        [SerializeField] private AudioClip _cowPepperPromptEnglish;
+        [SerializeField] private AudioClip _cowTomatoPromptEnglish;
+        [SerializeField] private AudioClip _pigOrangePromptEnglish;
+        [SerializeField] private AudioClip _pigPepperPromptEnglish;
+        [SerializeField] private AudioClip _pigTomatoPromptEnglish;
+        [SerializeField] private AudioClip _selfOrangePromptEnglish;
+        [SerializeField] private AudioClip _selfPepperPromptEnglish;
+        [SerializeField] private AudioClip _selfTomatoPromptEnglish;
+        
+        [Header("Spanish Prompts")]
+        [SerializeField] private AudioClip _cowOrangePromptSpanish;
+        [SerializeField] private AudioClip _cowPepperPromptSpanish;
+        [SerializeField] private AudioClip _cowTomatoPromptSpanish;
+        [SerializeField] private AudioClip _pigOrangePromptSpanish;
+        [SerializeField] private AudioClip _pigPepperPromptSpanish;
+        [SerializeField] private AudioClip _pigTomatoPromptSpanish;
+        [SerializeField] private AudioClip _selfOrangePromptSpanish;
+        [SerializeField] private AudioClip _selfPepperPromptSpanish;
+        [SerializeField] private AudioClip _selfTomatoPromptSpanish;
         
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -59,7 +70,7 @@ namespace Minigames.Feed
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
+                Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
         
@@ -70,38 +81,94 @@ namespace Minigames.Feed
             SetCorrectFeedableType();
             SetCorrectFoodType();
 
-            switch (_correctFeedableType)
+            switch (_minigameManager.language)
             {
-                case FeedableType.Cow:
-                    instructions = "Feed the cow the ";
+                case Language.English:
+                    switch (_correctFeedableType)
+                    {
+                        case FeedableType.Cow:
+                            instructions = "Feed the cow the ";
+                            break;
+                        case FeedableType.Pig:
+                            instructions = "Feed the pig the ";
+                            break;
+                        case FeedableType.Self:
+                            instructions = "Feed yourself the ";
+                            break;
+                        default:
+                            Debug.Log("Feedable type not set correctly!");
+                            break;
+                    }
+            
+                    switch (_correctFoodType)
+                    {
+                        case FoodType.Orange:
+                            instructions += "orange!";
+                            break;
+                        case FoodType.Pepper:
+                            instructions += "pepper!";
+                            break;
+                        case FoodType.Tomato:
+                            instructions += "tomato!";
+                            break;
+                        default:
+                            Debug.Log("Food type not set correctly!");
+                            break;
+                    }
                     break;
-                case FeedableType.Pig:
-                    instructions = "Feed the pig the ";
-                    break;
-                case FeedableType.Self:
-                    instructions = "Feed yourself the ";
+                case Language.Spanish:
+                    switch (_correctFeedableType)
+                    {
+                        case FeedableType.Cow:
+                            instructions = "¡Alimenta a la vaca ";
+                            break;
+                        case FeedableType.Pig:
+                            instructions = "¡Alimenta al cerdo ";
+                            break;
+                        case FeedableType.Self:
+                            switch (_correctFoodType)
+                            {
+                                case FoodType.Orange:
+                                    instructions = "¡Come la naranja!";
+                                    break;
+                                case FoodType.Pepper:
+                                    instructions = "¡Come el pimiento!";
+                                    break;
+                                case FoodType.Tomato:
+                                    instructions = "¡Come el tomate!";
+                                    break;
+                            }
+                            break;
+                        default:
+                            Debug.Log("Feedable type not set correctly!");
+                            break;
+                    }
+
+                    // Need this logic due to the grammatical nature of Spanish
+                    if (_correctFeedableType != FeedableType.Self)
+                    {
+                        switch (_correctFoodType)
+                        {
+                            case FoodType.Orange:
+                                instructions += "con la naranja!";
+                                break;
+                            case FoodType.Pepper:
+                                instructions += "con el pimiento!";
+                                break;
+                            case FoodType.Tomato:
+                                instructions += "con el tomate!";
+                                break;
+                            default:
+                                Debug.Log("Food type not set correctly!");
+                                break;
+                        }
+                    }
                     break;
                 default:
-                    Debug.Log("Feedable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
-            
-            switch (_correctFoodType)
-            {
-                case FoodType.Orange:
-                    instructions += "orange!";
-                    break;
-                case FoodType.Pepper:
-                    instructions += "pepper!";
-                    break;
-                case FoodType.Tomato:
-                    instructions += "tomato!";
-                    break;
-                default:
-                    Debug.Log("Food type not set correctly!");
-                    break;
-            }
-            
+
             return instructions;
         }
 
@@ -109,55 +176,113 @@ namespace Minigames.Feed
         {
             AudioClip audioClip = null;
 
-            switch (_correctFeedableType)
+            switch (_minigameManager.language)
             {
-                case FeedableType.Cow:
-                    if (_correctFoodType == FoodType.Orange)
+                case Language.English:
+                    switch (_correctFeedableType)
                     {
-                        audioClip = _cowOrangePrompt;
-                    }
-                    else if (_correctFoodType == FoodType.Pepper)
-                    {
-                        audioClip = _cowPepperPrompt;
-                    }
-                    else if (_correctFoodType == FoodType.Tomato)
-                    {
-                        audioClip = _cowTomatoPrompt;
+                        case FeedableType.Cow:
+                            if (_correctFoodType == FoodType.Orange)
+                            {
+                                audioClip = _cowOrangePromptEnglish;
+                            }
+                            else if (_correctFoodType == FoodType.Pepper)
+                            {
+                                audioClip = _cowPepperPromptEnglish;
+                            }
+                            else if (_correctFoodType == FoodType.Tomato)
+                            {
+                                audioClip = _cowTomatoPromptEnglish;
+                            }
+                            break;
+                        case FeedableType.Pig:
+                            if (_correctFoodType == FoodType.Orange)
+                            {
+                                audioClip = _pigOrangePromptEnglish;
+                            }
+                            else if (_correctFoodType == FoodType.Pepper)
+                            {
+                                audioClip = _pigPepperPromptEnglish;
+                            }
+                            else if (_correctFoodType == FoodType.Tomato)
+                            {
+                                audioClip = _pigTomatoPromptEnglish;
+                            }
+                            break;
+                        case FeedableType.Self:
+                            if (_correctFoodType == FoodType.Orange)
+                            {
+                                audioClip = _selfOrangePromptEnglish;
+                            }
+                            else if (_correctFoodType == FoodType.Pepper)
+                            {
+                                audioClip = _selfPepperPromptEnglish;
+                            }
+                            else if (_correctFoodType == FoodType.Tomato)
+                            {
+                                audioClip = _selfTomatoPromptEnglish;
+                            }
+                            break;
+                        default:
+                            Debug.Log("Feedable type not set correctly!");
+                            break;
                     }
                     break;
-                case FeedableType.Pig:
-                    if (_correctFoodType == FoodType.Orange)
+                case Language.Spanish:
+                    switch (_correctFeedableType)
                     {
-                        audioClip = _pigOrangePrompt;
-                    }
-                    else if (_correctFoodType == FoodType.Pepper)
-                    {
-                        audioClip = _pigPepperPrompt;
-                    }
-                    else if (_correctFoodType == FoodType.Tomato)
-                    {
-                        audioClip = _pigTomatoPrompt;
-                    }
-                    break;
-                case FeedableType.Self:
-                    if (_correctFoodType == FoodType.Orange)
-                    {
-                        audioClip = _selfOrangePrompt;
-                    }
-                    else if (_correctFoodType == FoodType.Pepper)
-                    {
-                        audioClip = _selfPepperPrompt;
-                    }
-                    else if (_correctFoodType == FoodType.Tomato)
-                    {
-                        audioClip = _selfTomatoPrompt;
+                        case FeedableType.Cow:
+                            if (_correctFoodType == FoodType.Orange)
+                            {
+                                audioClip = _cowOrangePromptSpanish;
+                            }
+                            else if (_correctFoodType == FoodType.Pepper)
+                            {
+                                audioClip = _cowPepperPromptSpanish;
+                            }
+                            else if (_correctFoodType == FoodType.Tomato)
+                            {
+                                audioClip = _cowTomatoPromptSpanish;
+                            }
+                            break;
+                        case FeedableType.Pig:
+                            if (_correctFoodType == FoodType.Orange)
+                            {
+                                audioClip = _pigOrangePromptSpanish;
+                            }
+                            else if (_correctFoodType == FoodType.Pepper)
+                            {
+                                audioClip = _pigPepperPromptSpanish;
+                            }
+                            else if (_correctFoodType == FoodType.Tomato)
+                            {
+                                audioClip = _pigTomatoPromptSpanish;
+                            }
+                            break;
+                        case FeedableType.Self:
+                            if (_correctFoodType == FoodType.Orange)
+                            {
+                                audioClip = _selfOrangePromptSpanish;
+                            }
+                            else if (_correctFoodType == FoodType.Pepper)
+                            {
+                                audioClip = _selfPepperPromptSpanish;
+                            }
+                            else if (_correctFoodType == FoodType.Tomato)
+                            {
+                                audioClip = _selfTomatoPromptSpanish;
+                            }
+                            break;
+                        default:
+                            Debug.Log("Feedable type not set correctly!");
+                            break;
                     }
                     break;
                 default:
-                    Debug.Log("Feedable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
-            
+
             return audioClip;
         }
 
@@ -170,7 +295,7 @@ namespace Minigames.Feed
 
         private void InitializeStartingVariables()
         {
-            _minigameTimer = _minigameManager._globalGameTimer;
+            _minigameTimer = _minigameManager.globalGameTimer;
             _success = false;
             _ending = false;
         }
