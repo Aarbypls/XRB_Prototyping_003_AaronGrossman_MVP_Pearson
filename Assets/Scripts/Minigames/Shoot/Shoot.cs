@@ -35,16 +35,26 @@ namespace Minigames.Shoot
         [SerializeField] private GameObject _position;
         [SerializeField] private GameObject _height;
 
-        [Header("Prompts")] 
-        [SerializeField] private AudioClip _chickenPrompt;
-        [SerializeField] private AudioClip _dogPrompt;
-        [SerializeField] private AudioClip _catPrompt;
-        [SerializeField] private AudioClip _leftPrompt;
-        [SerializeField] private AudioClip _middlePrompt;
-        [SerializeField] private AudioClip _rightPrompt;
-        [SerializeField] private AudioClip _lowestPrompt;
-        [SerializeField] private AudioClip _highestPrompt;
+        [Header("English Prompts")] 
+        [SerializeField] private AudioClip _chickenPromptEnglish;
+        [SerializeField] private AudioClip _dogPromptEnglish;
+        [SerializeField] private AudioClip _catPromptEnglish;
+        [SerializeField] private AudioClip _leftPromptEnglish;
+        [SerializeField] private AudioClip _middlePromptEnglish;
+        [SerializeField] private AudioClip _rightPromptEnglish;
+        [SerializeField] private AudioClip _lowestPromptEnglish;
+        [SerializeField] private AudioClip _highestPromptEnglish;
 
+        [Header("Spanish Prompts")] 
+        [SerializeField] private AudioClip _chickenPromptSpanish;
+        [SerializeField] private AudioClip _dogPromptSpanish;
+        [SerializeField] private AudioClip _catPromptSpanish;
+        [SerializeField] private AudioClip _leftPromptSpanish;
+        [SerializeField] private AudioClip _middlePromptSpanish;
+        [SerializeField] private AudioClip _rightPromptSpanish;
+        [SerializeField] private AudioClip _lowestPromptSpanish;
+        [SerializeField] private AudioClip _highestPromptSpanish;
+        
         private Vector3 _shootPointPosition;
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
@@ -69,7 +79,7 @@ namespace Minigames.Shoot
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
+                Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
 
@@ -84,37 +94,77 @@ namespace Minigames.Shoot
 
             SetCorrectShootableType();
 
-            switch (_correctShootableType)
+            switch (_minigameManager.language)
             {
-                case ShootableType.Cat:
-                    instructions = "Shoot the cat shaped hot air balloon!";
+                case Language.English:
+                    switch (_correctShootableType)
+                    {
+                        case ShootableType.Cat:
+                            instructions = "Shoot the cat shaped hot air balloon!";
+                            break;
+                        case ShootableType.Dog:
+                            instructions = "Shoot the dog shaped hot air balloon!";
+                            break;
+                        case ShootableType.Chicken:
+                            instructions = "Shoot the chicken shaped hot air balloon!";
+                            break;
+                        case ShootableType.Left:
+                            instructions = "Shoot the balloon on the left!";
+                            break;
+                        case ShootableType.Middle:
+                            instructions = "Shoot the balloon in the middle!";
+                            break;
+                        case ShootableType.Right:
+                            instructions = "Shoot the balloon on the right!";
+                            break;
+                        case ShootableType.Lowest:
+                            instructions = "Shoot the lowest hot air balloon!";
+                            break;
+                        case ShootableType.Highest:
+                            instructions = "Shoot the highest hot air balloon!";
+                            break;
+                        default:
+                            Debug.Log("Shootable type not set correctly!");
+                            break;
+                    }
                     break;
-                case ShootableType.Dog:
-                    instructions = "Shoot the dog shaped hot air balloon!";
-                    break;
-                case ShootableType.Chicken:
-                    instructions = "Shoot the chicken shaped hot air balloon!";
-                    break;
-                case ShootableType.Left:
-                    instructions = "Shoot the balloon on the left!";
-                    break;
-                case ShootableType.Middle:
-                    instructions = "Shoot the balloon in the middle!";
-                    break;
-                case ShootableType.Right:
-                    instructions = "Shoot the balloon on the right!";
-                    break;
-                case ShootableType.Lowest:
-                    instructions = "Shoot the lowest hot air balloon!";
-                    break;
-                case ShootableType.Highest:
-                    instructions = "Shoot the highest hot air balloon!";
+                case Language.Spanish:
+                    switch (_correctShootableType)
+                    {
+                        case ShootableType.Cat:
+                            instructions = "¡Dispara al globo aerostático con forma de gato!";
+                            break;
+                        case ShootableType.Dog:
+                            instructions = "¡Dispara al globo aerostático con forma de perro!";
+                            break;
+                        case ShootableType.Chicken:
+                            instructions = "¡Dispara al globo aerostático con forma de pollo!";
+                            break;
+                        case ShootableType.Left:
+                            instructions = "¡Dispara al globo de la izquierda!";
+                            break;
+                        case ShootableType.Middle:
+                            instructions = "¡Dispara al globo en el medio!";
+                            break;
+                        case ShootableType.Right:
+                            instructions = "¡Dispara al globo de la derecha!";
+                            break;
+                        case ShootableType.Lowest:
+                            instructions = "¡Dispara al globo aerostático más bajo!";
+                            break;
+                        case ShootableType.Highest:
+                            instructions = "¡Dispara al globo aerostático más alto!";
+                            break;
+                        default:
+                            Debug.Log("Shootable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Shootable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
-            
+
             return instructions;
         }
 
@@ -122,35 +172,75 @@ namespace Minigames.Shoot
         {
             AudioClip audioClip = null;
             
-            switch (_correctShootableType)
+            switch (_minigameManager.language)
             {
-                case ShootableType.Cat:
-                    audioClip = _catPrompt;
+                case Language.English:
+                    switch (_correctShootableType)
+                    {
+                        case ShootableType.Cat:
+                            audioClip = _catPromptEnglish;
+                            break;
+                        case ShootableType.Dog:
+                            audioClip = _dogPromptEnglish;
+                            break;
+                        case ShootableType.Chicken:
+                            audioClip = _chickenPromptEnglish;
+                            break;
+                        case ShootableType.Left:
+                            audioClip = _leftPromptEnglish;
+                            break;
+                        case ShootableType.Middle:
+                            audioClip = _middlePromptEnglish;
+                            break;
+                        case ShootableType.Right:
+                            audioClip = _rightPromptEnglish;
+                            break;
+                        case ShootableType.Lowest:
+                            audioClip = _lowestPromptEnglish;
+                            break;
+                        case ShootableType.Highest:
+                            audioClip = _highestPromptEnglish;
+                            break;
+                        default:
+                            Debug.Log("Shootable type not set correctly!");
+                            break;
+                    }
                     break;
-                case ShootableType.Dog:
-                    audioClip = _dogPrompt;
-                    break;
-                case ShootableType.Chicken:
-                    audioClip = _chickenPrompt;
-                    break;
-                case ShootableType.Left:
-                    audioClip = _leftPrompt;
-                    break;
-                case ShootableType.Middle:
-                    audioClip = _middlePrompt;
-                    break;
-                case ShootableType.Right:
-                    audioClip = _rightPrompt;
-                    break;
-                case ShootableType.Lowest:
-                    audioClip = _lowestPrompt;
-                    break;
-                case ShootableType.Highest:
-                    audioClip = _highestPrompt;
+                case Language.Spanish:
+                    switch (_correctShootableType)
+                    {
+                        case ShootableType.Cat:
+                            audioClip = _catPromptSpanish;
+                            break;
+                        case ShootableType.Dog:
+                            audioClip = _dogPromptSpanish;
+                            break;
+                        case ShootableType.Chicken:
+                            audioClip = _chickenPromptSpanish;
+                            break;
+                        case ShootableType.Left:
+                            audioClip = _leftPromptSpanish;
+                            break;
+                        case ShootableType.Middle:
+                            audioClip = _middlePromptSpanish;
+                            break;
+                        case ShootableType.Right:
+                            audioClip = _rightPromptSpanish;
+                            break;
+                        case ShootableType.Lowest:
+                            audioClip = _lowestPromptSpanish;
+                            break;
+                        case ShootableType.Highest:
+                            audioClip = _highestPromptSpanish;
+                            break;
+                        default:
+                            Debug.Log("Shootable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Shootable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
 
             return audioClip;
@@ -182,7 +272,7 @@ namespace Minigames.Shoot
                 _height.SetActive(true);
             }
             
-            _minigameTimer = _minigameManager._globalGameTimer;
+            _minigameTimer = _minigameManager.globalGameTimer;
             _success = false;
             _ending = false;
         }

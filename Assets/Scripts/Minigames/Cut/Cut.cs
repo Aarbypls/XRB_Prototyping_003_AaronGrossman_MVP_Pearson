@@ -23,10 +23,14 @@ namespace Minigames.Cut
         [SerializeField] private Transform _spawnPoint1;
         [SerializeField] private Transform _spawnPoint2;
 
-        [Header("Prompts")]
-        [SerializeField] private AudioClip _basketBallPrompt;
-        [SerializeField] private AudioClip _soccerBallPrompt;
+        [Header("English Prompts")]
+        [SerializeField] private AudioClip _basketBallPromptEnglish;
+        [SerializeField] private AudioClip _soccerBallPromptEnglish;
 
+        [Header("Spanish Prompts")]
+        [SerializeField] private AudioClip _basketBallPromptSpanish;
+        [SerializeField] private AudioClip _soccerBallPromptSpanish;
+        
         private GameObject _spawned1;
         private GameObject _spawned2;
 
@@ -51,7 +55,7 @@ namespace Minigames.Cut
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
+                Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
 
@@ -61,19 +65,41 @@ namespace Minigames.Cut
 
             SetCorrectCuttableType();
 
-            switch (_correctCuttableType)
+            switch (_minigameManager.language)
             {
-                case CuttableType.SoccerBall:
-                    instructions = "Cut the Soccer ball!";
+                case Language.English:
+                    switch (_correctCuttableType)
+                    {
+                        case CuttableType.SoccerBall:
+                            instructions = "Cut the soccer ball!";
+                            break;
+                        case CuttableType.BasketBall:
+                            instructions = "Cut the basketball!";
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
-                case CuttableType.BasketBall:
-                    instructions = "Cut the Basketball!";
+                case Language.Spanish:
+                    switch (_correctCuttableType)
+                    {
+                        case CuttableType.SoccerBall:
+                            instructions = "¡Corta el balón de fútbol!";
+                            break;
+                        case CuttableType.BasketBall:
+                            instructions = "¡Corta el balón de baloncesto!";
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Cuttable type not set correctly!");
+                    Debug.Log("Language not properly set in the MinigameManager!");
                     break;
             }
-
+            
             return instructions;
         }
 
@@ -81,17 +107,39 @@ namespace Minigames.Cut
         {
             AudioClip audioClip = null;
 
-            switch (_correctCuttableType)
+            switch (_minigameManager.language)
             {
-                case CuttableType.SoccerBall:
-                    audioClip = _soccerBallPrompt;
+                case Language.English:
+                    switch (_correctCuttableType)
+                    {
+                        case CuttableType.SoccerBall:
+                            audioClip = _soccerBallPromptEnglish;
+                            break;
+                        case CuttableType.BasketBall:
+                            audioClip = _basketBallPromptEnglish;
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
-                case CuttableType.BasketBall:
-                    audioClip = _basketBallPrompt;
+                case Language.Spanish:
+                    switch (_correctCuttableType)
+                    {
+                        case CuttableType.SoccerBall:
+                            audioClip = _soccerBallPromptSpanish;
+                            break;
+                        case CuttableType.BasketBall:
+                            audioClip = _basketBallPromptSpanish;
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Cuttable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
 
             return audioClip;
@@ -107,7 +155,7 @@ namespace Minigames.Cut
 
         private void InitializeStartingVariables()
         {
-            _minigameTimer = _minigameManager._globalGameTimer;
+            _minigameTimer = _minigameManager.globalGameTimer;
             _success = false;
             _ending = false;
 

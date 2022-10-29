@@ -29,17 +29,28 @@ namespace Minigames.Slap
         [SerializeField] private SFXManager _sfxManager;
         [SerializeField] private List<Slappable> _slappables;
         
-        [Header("Prompts")]
-        [SerializeField] private AudioClip _yellowRubberDuckPrompt;
-        [SerializeField] private AudioClip _blueRubberDuckPrompt;
-        [SerializeField] private AudioClip _redRubberDuckPrompt;
-        [SerializeField] private AudioClip _purpleRubberDuckPrompt;
-        [SerializeField] private AudioClip _greenRubberDuckPrompt;
-        [SerializeField] private AudioClip _orangeRubberDuckPrompt;
-        [SerializeField] private AudioClip _pinkRubberDuckPrompt;
-        [SerializeField] private AudioClip _whiteRubberDuckPrompt;
-        [SerializeField] private AudioClip _blackRubberDuckPrompt;
+        [Header("English Prompts")]
+        [SerializeField] private AudioClip _yellowRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _blueRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _redRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _purpleRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _greenRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _orangeRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _pinkRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _whiteRubberDuckPromptEnglish;
+        [SerializeField] private AudioClip _blackRubberDuckPromptEnglish;
 
+        [Header("Spanish Prompts")]
+        [SerializeField] private AudioClip _yellowRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _blueRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _redRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _purpleRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _greenRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _orangeRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _pinkRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _whiteRubberDuckPromptSpanish;
+        [SerializeField] private AudioClip _blackRubberDuckPromptSpanish;
+        
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _ending = false;
@@ -60,7 +71,7 @@ namespace Minigames.Slap
                     _sfxManager.PlayFailureClip();
                 }
                 
-                Invoke(nameof(EndGame), _minigameManager._globalEndOfGameTimer);
+                Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
 
@@ -70,38 +81,81 @@ namespace Minigames.Slap
 
             SetCorrectSlappableType();
 
-            switch (_correctSlappableType)
+            switch (_minigameManager.language)
             {
-                case SlappableType.YellowRubberDuck:
-                    instructions = "Slap the yellow rubber duck!";
+                case Language.English:
+                    switch (_correctSlappableType)
+                    {
+                        case SlappableType.YellowRubberDuck:
+                            instructions = "Slap the yellow rubber duck!";
+                            break;
+                        case SlappableType.BlueRubberDuck:
+                            instructions = "Slap the blue rubber duck!";
+                            break;
+                        case SlappableType.RedRubberDuck:
+                            instructions = "Slap the red rubber duck!";
+                            break;
+                        case SlappableType.PurpleRubberDuck:
+                            instructions = "Slap the purple rubber duck!";
+                            break;
+                        case SlappableType.GreenRubberDuck:
+                            instructions = "Slap the green rubber duck!";
+                            break;
+                        case SlappableType.OrangeRubberDuck:
+                            instructions = "Slap the orange rubber duck!";
+                            break;
+                        case SlappableType.PinkRubberDuck:
+                            instructions = "Slap the pink rubber duck!";
+                            break;
+                        case SlappableType.WhiteRubberDuck:
+                            instructions = "Slap the white rubber duck!";
+                            break;
+                        case SlappableType.BlackRubberDuck:
+                            instructions = "Slap the black rubber duck!";
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
-                case SlappableType.BlueRubberDuck:
-                    instructions = "Slap the blue rubber duck!";
-                    break;
-                case SlappableType.RedRubberDuck:
-                    instructions = "Slap the red rubber duck!";
-                    break;
-                case SlappableType.PurpleRubberDuck:
-                    instructions = "Slap the purple rubber duck!";
-                    break;
-                case SlappableType.GreenRubberDuck:
-                    instructions = "Slap the green rubber duck!";
-                    break;
-                case SlappableType.OrangeRubberDuck:
-                    instructions = "Slap the orange rubber duck!";
-                    break;
-                case SlappableType.PinkRubberDuck:
-                    instructions = "Slap the pink rubber duck!";
-                    break;
-                case SlappableType.WhiteRubberDuck:
-                    instructions = "Slap the white rubber duck!";
-                    break;
-                case SlappableType.BlackRubberDuck:
-                    instructions = "Slap the black rubber duck!";
+                case Language.Spanish:
+                    switch (_correctSlappableType)
+                    {
+                        case SlappableType.YellowRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma amarillo!";
+                            break;
+                        case SlappableType.BlueRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma azul!";
+                            break;
+                        case SlappableType.RedRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma rojo!";
+                            break;
+                        case SlappableType.PurpleRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma morado!";
+                            break;
+                        case SlappableType.GreenRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma verde!";
+                            break;
+                        case SlappableType.OrangeRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma naranja!";
+                            break;
+                        case SlappableType.PinkRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma rosa!";
+                            break;
+                        case SlappableType.WhiteRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma blanco!";
+                            break;
+                        case SlappableType.BlackRubberDuck:
+                            instructions = "¡Dale una palmada al patito de goma negro!";
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Cuttable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
 
             return instructions;
@@ -111,38 +165,81 @@ namespace Minigames.Slap
         {
             AudioClip audioClip = null;
             
-            switch (_correctSlappableType)
+            switch (_minigameManager.language)
             {
-                case SlappableType.YellowRubberDuck:
-                    audioClip = _yellowRubberDuckPrompt;
+                case Language.English:
+                    switch (_correctSlappableType)
+                    {
+                        case SlappableType.YellowRubberDuck:
+                            audioClip = _yellowRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.BlueRubberDuck:
+                            audioClip = _blueRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.RedRubberDuck:
+                            audioClip = _redRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.PurpleRubberDuck:
+                            audioClip = _purpleRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.GreenRubberDuck:
+                            audioClip = _greenRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.OrangeRubberDuck:
+                            audioClip = _orangeRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.PinkRubberDuck:
+                            audioClip = _pinkRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.WhiteRubberDuck:
+                            audioClip = _whiteRubberDuckPromptEnglish;
+                            break;
+                        case SlappableType.BlackRubberDuck:
+                            audioClip = _blackRubberDuckPromptEnglish;
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
-                case SlappableType.BlueRubberDuck:
-                    audioClip = _blueRubberDuckPrompt;
-                    break;
-                case SlappableType.RedRubberDuck:
-                    audioClip = _redRubberDuckPrompt;
-                    break;
-                case SlappableType.PurpleRubberDuck:
-                    audioClip = _purpleRubberDuckPrompt;
-                    break;
-                case SlappableType.GreenRubberDuck:
-                    audioClip = _greenRubberDuckPrompt;
-                    break;
-                case SlappableType.OrangeRubberDuck:
-                    audioClip = _orangeRubberDuckPrompt;
-                    break;
-                case SlappableType.PinkRubberDuck:
-                    audioClip = _pinkRubberDuckPrompt;
-                    break;
-                case SlappableType.WhiteRubberDuck:
-                    audioClip = _whiteRubberDuckPrompt;
-                    break;
-                case SlappableType.BlackRubberDuck:
-                    audioClip = _blackRubberDuckPrompt;
+                case Language.Spanish:
+                    switch (_correctSlappableType)
+                    {
+                        case SlappableType.YellowRubberDuck:
+                            audioClip = _yellowRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.BlueRubberDuck:
+                            audioClip = _blueRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.RedRubberDuck:
+                            audioClip = _redRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.PurpleRubberDuck:
+                            audioClip = _purpleRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.GreenRubberDuck:
+                            audioClip = _greenRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.OrangeRubberDuck:
+                            audioClip = _orangeRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.PinkRubberDuck:
+                            audioClip = _pinkRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.WhiteRubberDuck:
+                            audioClip = _whiteRubberDuckPromptSpanish;
+                            break;
+                        case SlappableType.BlackRubberDuck:
+                            audioClip = _blackRubberDuckPromptSpanish;
+                            break;
+                        default:
+                            Debug.Log("Cuttable type not set correctly!");
+                            break;
+                    }
                     break;
                 default:
-                    Debug.Log("Cuttable type not set correctly!");
-                    break;
+                    Debug.Log("Language not properly set in the MinigameManager!");
+                    break;               
             }
 
             return audioClip;
@@ -164,7 +261,7 @@ namespace Minigames.Slap
                 }
             }
 
-            _minigameTimer = _minigameManager._globalGameTimer;
+            _minigameTimer = _minigameManager.globalGameTimer;
             success = false;
             _ending = false;
         }

@@ -9,12 +9,20 @@ using Minigames.Shoot;
 using Minigames.Slap;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
+
+public enum Language
+{
+    English = 1,
+    Spanish = 2
+}
 
 public class MinigameManager : MonoBehaviour
 {
-    public float _globalGameTimer = 10f;
-    public float _globalEndOfGameTimer = .1f;
+    public Language language;
+    public float globalGameTimer = 8f;
+    public float globalEndOfGameTimer = .1f;
     
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI _minigameInstructions;
