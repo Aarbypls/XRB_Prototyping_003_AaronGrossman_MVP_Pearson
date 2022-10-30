@@ -12973,6 +12973,51 @@ Transform:
   m_Father: {fileID: 1852529610}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1571399982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571399984}
+  - component: {fileID: 1571399983}
+  m_Layer: 0
+  m_Name: ReportCard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1571399983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571399982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bf7880a2e96fc4eba21b89f66b9442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _correctAnswersText: {fileID: 0}
+  _reportCardItems: {fileID: 0}
+--- !u!4 &1571399984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571399982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7620348, y: 0.96162474, z: -2.749192}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1588674830
 GameObject:
   m_ObjectHideFlags: 0
@@ -18378,14 +18423,13 @@ MonoBehaviour:
   globalGameTimer: 8
   globalEndOfGameTimer: 0.1
   _minigames:
-  - {fileID: 543967889}
-  - {fileID: 903632307}
-  - {fileID: 1607472696}
-  - {fileID: 1015132579}
-  - {fileID: 1352276814}
   - {fileID: 1420585492}
   _minigameInstructions: {fileID: 135059147}
   _promptAudioSource: {fileID: 1670287277}
+  _minigamesPerLevel: 18
+  _minigamesPlayed: 0
+  _minigameSuccesses: 0
+  _reportCard: {fileID: 1571399983}
 --- !u!1 &2094205995
 GameObject:
   m_ObjectHideFlags: 0
