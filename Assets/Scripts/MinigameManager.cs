@@ -27,6 +27,11 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] private List<GameObject> _minigames = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI _minigameInstructions;
     [SerializeField] private AudioSource _promptAudioSource;
+    [SerializeField] private int _minigamesPerLevel = 18;
+    [SerializeField] private int _minigamesPlayed = 0;
+    [SerializeField] private int _minigameSuccesses = 0;
+    [SerializeField] private ReportCard _reportCard;
+    [SerializeField] private List<ReportCardItem> _reportCardItems = new List<ReportCardItem>();
     
     private List<GameObject> _randomizedMinigames = new List<GameObject>();
     private static Random _rng = new Random();
@@ -47,15 +52,22 @@ public class MinigameManager : MonoBehaviour
 
     public void PlayMinigame()
     {
-        if (_randomizedMinigames.Count == 0)
+        if (_minigamesPlayed >= _minigamesPerLevel)
         {
-            CreateMinigameList();
-            Invoke(nameof(PlayMinigame), 1f);
-            return;
+            HandleEndGameState();
         }
+        else
+        {
+            if (_randomizedMinigames.Count == 0)
+            {
+                CreateMinigameList();
+                Invoke(nameof(PlayMinigame), 1f);
+                return;
+            }
         
-        SetMinigameInstructionsUIText();
-        Invoke(nameof(SetMinigameActive),  _promptAudioSource.clip == null ? 2f : _promptAudioSource.clip.length + 1.5f);
+            SetMinigameInstructionsUIText();
+            Invoke(nameof(SetMinigameActive),  _promptAudioSource.clip == null ? 2f : _promptAudioSource.clip.length + 1.5f);
+        }
     }
 
     private void SetMinigameActive()
@@ -120,5 +132,33 @@ public class MinigameManager : MonoBehaviour
     {
         _minigameInstructions.SetText("");
         _minigameInstructions.gameObject.SetActive(false);
+    }
+
+    public void RegisterSuccess()
+    {
+        _minigameSuccesses++;
+    }
+
+    public void AddReportCardItemToList(ReportCardItem reportCardItem)
+    {
+        _reportCardItems.Add(reportCardItem);
+    }
+    
+    private void HandleEndGameState()
+    {
+        SetUpReportCard();
+    }
+
+    private void SetUpReportCard()
+    {
+        _reportCard.UpdateCorrectAnswersText(_minigameSuccesses, _minigamesPerLevel);
+
+        foreach (ReportCardItem reportCardItem in _reportCardItems)
+        {
+            _reportCard.UpdateReportCardItems(reportCardItem.prompt, reportCardItem.translation, reportCardItem.playerSelection, 
+                language == Language.English, reportCardItem.timedOut);
+        }
+        
+        _reportCard.gameObject.SetActive(true);
     }
 }

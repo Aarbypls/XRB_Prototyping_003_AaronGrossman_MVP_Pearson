@@ -54,6 +54,7 @@ namespace Minigames.Slap
         private float _minigameTimer;
         private bool _failureClipPlayed = false;
         private bool _ending = false;
+        private ReportCardItem _reportCardItem = new ReportCardItem();
 
         private void Update()
         {
@@ -66,11 +67,17 @@ namespace Minigames.Slap
                 
                 // only play the failure clip if it HASN'T been played before
                 // (i.e., if they ran out of time without doing anything)
-                if (!_failureClipPlayed && !success)
+                if (!success)
                 {
-                    _sfxManager.PlayFailureClip();
+                    if (!_failureClipPlayed)
+                    {
+                        _sfxManager.PlayFailureClip();
+                    }
+                    
+                    _reportCardItem.timedOut = true;
+                    _minigameManager.AddReportCardItemToList(_reportCardItem);
                 }
-                
+
                 Invoke(nameof(EndGame), _minigameManager.globalEndOfGameTimer);
             }
         }
@@ -158,6 +165,9 @@ namespace Minigames.Slap
                     break;               
             }
 
+            _reportCardItem.prompt = instructions;
+            _reportCardItem.translation = "";
+            
             return instructions;
         }
 
@@ -278,10 +288,13 @@ namespace Minigames.Slap
             if (slappableType == _correctSlappableType)
             {
                 _sfxManager.PlaySuccessClip();
-                _minigameTimer = 1f;                
+                _minigameTimer = 1f;
+                _minigameManager.RegisterSuccess();
             }
             else
             {
+                _reportCardItem.timedOut = false;
+                _minigameManager.AddReportCardItemToList(_reportCardItem);
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
             }
