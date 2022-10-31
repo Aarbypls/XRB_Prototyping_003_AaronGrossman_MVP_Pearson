@@ -7,7 +7,6 @@ public class ReportCardItem
 {
     public string prompt;
     public string translation;
-    public string playerSelection;
     public bool timedOut;
 }
 
@@ -15,12 +14,7 @@ public class ReportCard : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _correctAnswersText;
     [SerializeField] private TextMeshProUGUI _reportCardItems;
-
-    void Start()
-    {
-        _reportCardItems.text = "";
-    }
-
+    
     public void UpdateCorrectAnswersText(int minigameSuccesses, int minigamesPerLevel)
     {
         if (minigameSuccesses / (float)minigamesPerLevel > .70f)
@@ -33,20 +27,20 @@ public class ReportCard : MonoBehaviour
         }
     }
 
-    public void UpdateReportCardItems(string prompt, string translation, string playerSelection, bool inEnglish, bool timedOut)
+    public void UpdateReportCardItems(string prompt, string translation, bool inEnglish, bool timedOut)
     {
         string reportCardItem = $"\"{prompt}\"" + "\n";
+        
+        if (!inEnglish)
+        {
+            reportCardItem += ("\t" + "Translation: \"" + translation + "\"" + "\n");
+        }
         
         if (timedOut)
         {
             reportCardItem += ("\t" + "You ran out of time!" + "\n\n");
         }
-        else
-        {
-            reportCardItem += ("\t" + "Translation: \"" + translation + "\"" + "\n");
-            reportCardItem += ("\t" + "Your selection: \"" + playerSelection + "\"" + "\n\n");
-        }
-        
+
         _reportCardItems.text += reportCardItem;
     }
 }

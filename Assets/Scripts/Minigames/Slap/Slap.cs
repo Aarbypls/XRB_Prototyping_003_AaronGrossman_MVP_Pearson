@@ -84,91 +84,58 @@ namespace Minigames.Slap
 
         public string SetObjectivesAndGetUIText()
         {
-            string instructions = string.Empty;
-
+            string instructionsEnglish = string.Empty;
+            string instructionsNonEnglish = string.Empty;
+                
             SetCorrectSlappableType();
 
-            switch (_minigameManager.language)
+            switch (_correctSlappableType)
             {
-                case Language.English:
-                    switch (_correctSlappableType)
-                    {
-                        case SlappableType.YellowRubberDuck:
-                            instructions = "Slap the yellow rubber duck!";
-                            break;
-                        case SlappableType.BlueRubberDuck:
-                            instructions = "Slap the blue rubber duck!";
-                            break;
-                        case SlappableType.RedRubberDuck:
-                            instructions = "Slap the red rubber duck!";
-                            break;
-                        case SlappableType.PurpleRubberDuck:
-                            instructions = "Slap the purple rubber duck!";
-                            break;
-                        case SlappableType.GreenRubberDuck:
-                            instructions = "Slap the green rubber duck!";
-                            break;
-                        case SlappableType.OrangeRubberDuck:
-                            instructions = "Slap the orange rubber duck!";
-                            break;
-                        case SlappableType.PinkRubberDuck:
-                            instructions = "Slap the pink rubber duck!";
-                            break;
-                        case SlappableType.WhiteRubberDuck:
-                            instructions = "Slap the white rubber duck!";
-                            break;
-                        case SlappableType.BlackRubberDuck:
-                            instructions = "Slap the black rubber duck!";
-                            break;
-                        default:
-                            Debug.Log("Cuttable type not set correctly!");
-                            break;
-                    }
+                case SlappableType.YellowRubberDuck:
+                    instructionsEnglish = "Slap the yellow rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma amarillo!";
                     break;
-                case Language.Spanish:
-                    switch (_correctSlappableType)
-                    {
-                        case SlappableType.YellowRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma amarillo!";
-                            break;
-                        case SlappableType.BlueRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma azul!";
-                            break;
-                        case SlappableType.RedRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma rojo!";
-                            break;
-                        case SlappableType.PurpleRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma morado!";
-                            break;
-                        case SlappableType.GreenRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma verde!";
-                            break;
-                        case SlappableType.OrangeRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma naranja!";
-                            break;
-                        case SlappableType.PinkRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma rosa!";
-                            break;
-                        case SlappableType.WhiteRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma blanco!";
-                            break;
-                        case SlappableType.BlackRubberDuck:
-                            instructions = "¡Dale una palmada al patito de goma negro!";
-                            break;
-                        default:
-                            Debug.Log("Cuttable type not set correctly!");
-                            break;
-                    }
+                case SlappableType.BlueRubberDuck:
+                    instructionsEnglish = "Slap the blue rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma azul!";
+                    break;
+                case SlappableType.RedRubberDuck:
+                    instructionsEnglish = "Slap the red rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma rojo!";
+                    break;
+                case SlappableType.PurpleRubberDuck:
+                    instructionsEnglish = "Slap the purple rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma morado!";
+                    break;
+                case SlappableType.GreenRubberDuck:
+                    instructionsEnglish = "Slap the green rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma verde!";
+                    break;
+                case SlappableType.OrangeRubberDuck:
+                    instructionsEnglish = "Slap the orange rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma naranja!";
+                    break;
+                case SlappableType.PinkRubberDuck:
+                    instructionsEnglish = "Slap the pink rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma rosa!";
+                    break;
+                case SlappableType.WhiteRubberDuck:
+                    instructionsEnglish = "Slap the white rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma blanco!";
+                    break;
+                case SlappableType.BlackRubberDuck:
+                    instructionsEnglish = "Slap the black rubber duck!";
+                    instructionsNonEnglish = "¡Dale una palmada al patito de goma negro!";
                     break;
                 default:
-                    Debug.Log("Language not properly set in the MinigameManager!");
-                    break;               
+                    Debug.Log("Cuttable type not set correctly!");
+                    break;
             }
 
-            _reportCardItem.prompt = instructions;
-            _reportCardItem.translation = "";
+            _reportCardItem.prompt = _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
+            _reportCardItem.translation = instructionsEnglish;
             
-            return instructions;
+            return _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
         }
 
         public AudioClip GetPromptAudioClip()
