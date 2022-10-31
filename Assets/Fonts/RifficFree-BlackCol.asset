@@ -65,7 +65,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.284
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333
@@ -160,11 +160,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: RifficFree-Bold SDF
+  m_Name: RifficFree-BlackCol
   m_EditorClassIdentifier: 
-  hashCode: 227115292
+  hashCode: -1189474449
   material: {fileID: -2416319517110042955}
-  materialHashCode: 355117628
+  materialHashCode: 731325551
   m_Version: 1.1.0
   m_SourceFontFileGUID: 2626a30a6a0071841bb5f155b0be6b8d
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 2626a30a6a0071841bb5f155b0be6b8d, type: 3}
