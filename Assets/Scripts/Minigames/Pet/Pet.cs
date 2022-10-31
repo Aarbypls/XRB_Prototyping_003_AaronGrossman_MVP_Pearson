@@ -33,6 +33,7 @@ namespace Minigames.Pet
         private bool _failureClipPlayed = false;
         private bool _success = false;
         private bool _ending = false;
+        
         private ReportCardItem _reportCardItem = new ReportCardItem();
         
         private void Update()
@@ -63,55 +64,34 @@ namespace Minigames.Pet
         
         public string SetObjectivesAndGetUIText()
         {
-            string instructions = String.Empty;
+            string instructionsEnglish = string.Empty;
+            string instructionsNonEnglish = string.Empty;
 
             SetCorrectPettableType();
-
-            switch (_minigameManager.language)
+            
+            switch (_correctPettableType)
             {
-                case Language.English:
-                    switch (_correctPettableType)
-                    {
-                        case PettableType.Chicken:
-                            instructions = "Pet the chicken!";
-                            break;
-                        case PettableType.Duck:
-                            instructions = "Pet the duck!";
-                            break;
-                        case PettableType.Pig:
-                            instructions = "Pet the pig!";
-                            break;
-                        default:
-                            Debug.Log("Pettable type not set correctly!");
-                            break;
-                    }
+                case PettableType.Chicken:
+                    instructionsEnglish = "Pet the chicken!";
+                    instructionsNonEnglish = "¡Acaricia el pollo!";
                     break;
-                case Language.Spanish:
-                    switch (_correctPettableType)
-                    {
-                        case PettableType.Chicken:
-                            instructions = "¡Acaricia el pollo!";
-                            break;
-                        case PettableType.Duck:
-                            instructions = "¡Acaricia al pato!";
-                            break;
-                        case PettableType.Pig:
-                            instructions = "¡Acaricia al cerdo!";
-                            break;
-                        default:
-                            Debug.Log("Pettable type not set correctly!");
-                            break;
-                    }
+                case PettableType.Duck:
+                    instructionsEnglish = "Pet the duck!";
+                    instructionsNonEnglish = "¡Acaricia al pato!";
+                    break;
+                case PettableType.Pig:
+                    instructionsEnglish = "Pet the pig!";
+                    instructionsNonEnglish = "¡Acaricia al cerdo!";
                     break;
                 default:
-                    Debug.Log("Language not properly set in the MinigameManager!");
-                    break;               
+                    Debug.Log("Pettable type not set correctly!");
+                    break;
             }
-            
-            _reportCardItem.prompt = instructions;
-            _reportCardItem.translation = "";
 
-            return instructions;
+            _reportCardItem.prompt = _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
+            _reportCardItem.translation = instructionsEnglish;
+            
+            return _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
         }
 
         public AudioClip GetPromptAudioClip()
@@ -164,7 +144,6 @@ namespace Minigames.Pet
         
         private void OnEnable()
         {
-            _reportCardItem = new ReportCardItem();
             _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
         }

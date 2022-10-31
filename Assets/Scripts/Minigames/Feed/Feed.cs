@@ -84,103 +84,72 @@ namespace Minigames.Feed
         
         public string SetObjectivesAndGetUIText()
         {
-            string instructions = String.Empty;
+            string instructionsEnglish = string.Empty;
+            string instructionsNonEnglish = string.Empty;
 
             SetCorrectFeedableType();
             SetCorrectFoodType();
-
-            switch (_minigameManager.language)
-            {
-                case Language.English:
-                    switch (correctFeedableType)
-                    {
-                        case FeedableType.Cow:
-                            instructions = "Feed the cow the ";
-                            break;
-                        case FeedableType.Pig:
-                            instructions = "Feed the pig the ";
-                            break;
-                        case FeedableType.Self:
-                            instructions = "Feed yourself the ";
-                            break;
-                        default:
-                            Debug.Log("Feedable type not set correctly!");
-                            break;
-                    }
             
-                    switch (correctFoodType)
-                    {
-                        case FoodType.Orange:
-                            instructions += "orange!";
-                            break;
-                        case FoodType.Pepper:
-                            instructions += "pepper!";
-                            break;
-                        case FoodType.Tomato:
-                            instructions += "tomato!";
-                            break;
-                        default:
-                            Debug.Log("Food type not set correctly!");
-                            break;
-                    }
+            switch (correctFeedableType)
+            {
+                case FeedableType.Cow:
+                    instructionsEnglish = "Feed the cow the ";
+                    instructionsNonEnglish = "¡Alimenta a la vaca ";
                     break;
-                case Language.Spanish:
-                    switch (correctFeedableType)
-                    {
-                        case FeedableType.Cow:
-                            instructions = "¡Alimenta a la vaca ";
-                            break;
-                        case FeedableType.Pig:
-                            instructions = "¡Alimenta al cerdo ";
-                            break;
-                        case FeedableType.Self:
-                            switch (correctFoodType)
-                            {
-                                case FoodType.Orange:
-                                    instructions = "¡Come la naranja!";
-                                    break;
-                                case FoodType.Pepper:
-                                    instructions = "¡Come el pimiento!";
-                                    break;
-                                case FoodType.Tomato:
-                                    instructions = "¡Come el tomate!";
-                                    break;
-                            }
-                            break;
-                        default:
-                            Debug.Log("Feedable type not set correctly!");
-                            break;
-                    }
-
-                    // Need this logic due to the grammatical nature of Spanish
-                    if (correctFeedableType != FeedableType.Self)
-                    {
-                        switch (correctFoodType)
-                        {
-                            case FoodType.Orange:
-                                instructions += "con la naranja!";
-                                break;
-                            case FoodType.Pepper:
-                                instructions += "con el pimiento!";
-                                break;
-                            case FoodType.Tomato:
-                                instructions += "con el tomate!";
-                                break;
-                            default:
-                                Debug.Log("Food type not set correctly!");
-                                break;
-                        }
-                    }
+                case FeedableType.Pig:
+                    instructionsEnglish = "Feed the pig the ";
+                    instructionsNonEnglish = "¡Alimenta al cerdo ";
+                    break;
+                case FeedableType.Self:
+                    instructionsEnglish = "Feed yourself the ";
+                    instructionsNonEnglish = "";
                     break;
                 default:
-                    Debug.Log("Language not properly set in the MinigameManager!");
-                    break;               
+                    Debug.Log("Feedable type not set correctly!");
+                    break;
             }
-            
-            _reportCardItem.prompt = instructions;
-            _reportCardItem.translation = "";
+    
+            switch (correctFoodType)
+            {
+                case FoodType.Orange:
+                    instructionsEnglish += "orange!";
+                    instructionsNonEnglish += "con la naranja!";
 
-            return instructions;
+                    if (correctFeedableType == FeedableType.Self)
+                    {
+                        instructionsNonEnglish = "¡Come la naranja!";
+                    }
+                    
+                    break;
+                case FoodType.Pepper:
+                    instructionsEnglish += "pepper!";
+                    instructionsNonEnglish += "con el pimiento!";
+                    
+                    if (correctFeedableType == FeedableType.Self)
+                    {
+                        instructionsNonEnglish = "¡Come el pimiento!";
+                    }
+                    
+                    break;
+                case FoodType.Tomato:
+                    instructionsEnglish += "tomato!";
+                    instructionsNonEnglish += "con el tomate!";
+                    
+                    if (correctFeedableType == FeedableType.Self)
+                    {
+                        instructionsNonEnglish = "¡Come el tomate!";
+                    }
+                    
+                    break;
+                default:
+                    Debug.Log("Food type not set correctly!");
+                    break;
+            }
+
+            _reportCardItem.prompt = _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
+            _reportCardItem.translation = instructionsEnglish;
+            
+            return _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
         }
 
         public AudioClip GetPromptAudioClip()
@@ -299,7 +268,6 @@ namespace Minigames.Feed
 
         private void OnEnable()
         {
-            _reportCardItem = new ReportCardItem();
             _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
             EnableFood();

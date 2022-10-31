@@ -97,85 +97,54 @@ namespace Minigames.Shoot
 
         public string SetObjectivesAndGetUIText()
         {
-            string instructions = String.Empty;
+            string instructionsEnglish = string.Empty;
+            string instructionsNonEnglish = string.Empty;
 
             SetCorrectShootableType();
-
-            switch (_minigameManager.language)
+            
+            switch (_correctShootableType)
             {
-                case Language.English:
-                    switch (_correctShootableType)
-                    {
-                        case ShootableType.Cat:
-                            instructions = "Shoot the cat shaped hot air balloon!";
-                            break;
-                        case ShootableType.Dog:
-                            instructions = "Shoot the dog shaped hot air balloon!";
-                            break;
-                        case ShootableType.Chicken:
-                            instructions = "Shoot the chicken shaped hot air balloon!";
-                            break;
-                        case ShootableType.Left:
-                            instructions = "Shoot the balloon on the left!";
-                            break;
-                        case ShootableType.Middle:
-                            instructions = "Shoot the balloon in the middle!";
-                            break;
-                        case ShootableType.Right:
-                            instructions = "Shoot the balloon on the right!";
-                            break;
-                        case ShootableType.Lowest:
-                            instructions = "Shoot the lowest hot air balloon!";
-                            break;
-                        case ShootableType.Highest:
-                            instructions = "Shoot the highest hot air balloon!";
-                            break;
-                        default:
-                            Debug.Log("Shootable type not set correctly!");
-                            break;
-                    }
+                case ShootableType.Cat:
+                    instructionsEnglish = "Shoot the cat shaped hot air balloon!";
+                    instructionsNonEnglish = "¡Dispara al globo aerostático con forma de gato!";
                     break;
-                case Language.Spanish:
-                    switch (_correctShootableType)
-                    {
-                        case ShootableType.Cat:
-                            instructions = "¡Dispara al globo aerostático con forma de gato!";
-                            break;
-                        case ShootableType.Dog:
-                            instructions = "¡Dispara al globo aerostático con forma de perro!";
-                            break;
-                        case ShootableType.Chicken:
-                            instructions = "¡Dispara al globo aerostático con forma de pollo!";
-                            break;
-                        case ShootableType.Left:
-                            instructions = "¡Dispara al globo de la izquierda!";
-                            break;
-                        case ShootableType.Middle:
-                            instructions = "¡Dispara al globo en el medio!";
-                            break;
-                        case ShootableType.Right:
-                            instructions = "¡Dispara al globo de la derecha!";
-                            break;
-                        case ShootableType.Lowest:
-                            instructions = "¡Dispara al globo aerostático más bajo!";
-                            break;
-                        case ShootableType.Highest:
-                            instructions = "¡Dispara al globo aerostático más alto!";
-                            break;
-                        default:
-                            Debug.Log("Shootable type not set correctly!");
-                            break;
-                    }
+                case ShootableType.Dog:
+                    instructionsEnglish = "Shoot the dog shaped hot air balloon!";
+                    instructionsNonEnglish = "¡Dispara al globo aerostático con forma de perro!";
+                    break;
+                case ShootableType.Chicken:
+                    instructionsEnglish = "Shoot the chicken shaped hot air balloon!";
+                    instructionsNonEnglish = "¡Dispara al globo aerostático con forma de pollo!";
+                    break;
+                case ShootableType.Left:
+                    instructionsEnglish = "Shoot the balloon on the left!";
+                    instructionsNonEnglish = "¡Dispara al globo de la izquierda!";
+                    break;
+                case ShootableType.Middle:
+                    instructionsEnglish = "Shoot the balloon in the middle!";
+                    instructionsNonEnglish = "¡Dispara al globo en el medio!";
+                    break;
+                case ShootableType.Right:
+                    instructionsEnglish = "Shoot the balloon on the right!";
+                    instructionsNonEnglish = "¡Dispara al globo de la derecha!";
+                    break;
+                case ShootableType.Lowest:
+                    instructionsEnglish = "Shoot the lowest hot air balloon!";
+                    instructionsNonEnglish = "¡Dispara al globo aerostático más bajo!";
+                    break;
+                case ShootableType.Highest:
+                    instructionsEnglish = "Shoot the highest hot air balloon!";
+                    instructionsNonEnglish = "¡Dispara al globo aerostático más alto!";
                     break;
                 default:
-                    Debug.Log("Language not properly set in the MinigameManager!");
-                    break;               
+                    Debug.Log("Shootable type not set correctly!");
+                    break;
             }
             
-            _reportCardItem.prompt = instructions;
-            _reportCardItem.translation = "";
-
-            return instructions;
+            _reportCardItem.prompt = _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
+            _reportCardItem.translation = instructionsEnglish;
+            
+            return _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
         }
 
         public AudioClip GetPromptAudioClip()
@@ -258,7 +227,6 @@ namespace Minigames.Shoot
         
         private void OnEnable()
         {
-            _reportCardItem = new ReportCardItem();
             _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
             _gun.SetActive(true);

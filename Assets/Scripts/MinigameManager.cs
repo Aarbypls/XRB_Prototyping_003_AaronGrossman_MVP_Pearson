@@ -66,6 +66,7 @@ public class MinigameManager : MonoBehaviour
             }
         
             SetMinigameInstructionsUIText();
+            _minigamesPlayed++;
             Invoke(nameof(SetMinigameActive),  _promptAudioSource.clip == null ? 2f : _promptAudioSource.clip.length + 1.5f);
         }
     }
@@ -138,7 +139,7 @@ public class MinigameManager : MonoBehaviour
     {
         _minigameSuccesses++;
     }
-
+    
     public void AddReportCardItemToList(ReportCardItem reportCardItem)
     {
         _reportCardItems.Add(reportCardItem);
@@ -155,7 +156,7 @@ public class MinigameManager : MonoBehaviour
 
         foreach (ReportCardItem reportCardItem in _reportCardItems)
         {
-            _reportCard.UpdateReportCardItems(reportCardItem.prompt, reportCardItem.translation, reportCardItem.playerSelection, 
+            _reportCard.UpdateReportCardItems(reportCardItem.prompt, reportCardItem.translation, 
                 language == Language.English, reportCardItem.timedOut);
         }
         

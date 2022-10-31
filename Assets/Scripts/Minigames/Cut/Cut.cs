@@ -68,49 +68,30 @@ namespace Minigames.Cut
 
         public string SetObjectivesAndGetUIText()
         {
-            string instructions = string.Empty;
+            string instructionsEnglish = string.Empty;
+            string instructionsNonEnglish = String.Empty;
 
             SetCorrectCuttableType();
-
-            switch (_minigameManager.language)
+            
+            switch (_correctCuttableType)
             {
-                case Language.English:
-                    switch (_correctCuttableType)
-                    {
-                        case CuttableType.SoccerBall:
-                            instructions = "Cut the soccer ball!";
-                            break;
-                        case CuttableType.BasketBall:
-                            instructions = "Cut the basketball!";
-                            break;
-                        default:
-                            Debug.Log("Cuttable type not set correctly!");
-                            break;
-                    }
+                case CuttableType.SoccerBall:
+                    instructionsEnglish = "Cut the soccer ball!";
+                    instructionsNonEnglish = "¡Corta el balón de fútbol!";
                     break;
-                case Language.Spanish:
-                    switch (_correctCuttableType)
-                    {
-                        case CuttableType.SoccerBall:
-                            instructions = "¡Corta el balón de fútbol!";
-                            break;
-                        case CuttableType.BasketBall:
-                            instructions = "¡Corta el balón de baloncesto!";
-                            break;
-                        default:
-                            Debug.Log("Cuttable type not set correctly!");
-                            break;
-                    }
+                case CuttableType.BasketBall:
+                    instructionsEnglish = "Cut the basketball!";
+                    instructionsNonEnglish = "¡Corta el balón de baloncesto!";
                     break;
                 default:
-                    Debug.Log("Language not properly set in the MinigameManager!");
+                    Debug.Log("Cuttable type not set correctly!");
                     break;
             }
+
+            _reportCardItem.prompt = _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
+            _reportCardItem.translation = instructionsEnglish;
             
-            _reportCardItem.prompt = instructions;
-            _reportCardItem.translation = "";
-            
-            return instructions;
+            return _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
         }
 
         public AudioClip GetPromptAudioClip()
@@ -157,7 +138,6 @@ namespace Minigames.Cut
         
         private void OnEnable()
         {
-            _reportCardItem = new ReportCardItem();
             _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
             _rightHandObject.SetActive(false);

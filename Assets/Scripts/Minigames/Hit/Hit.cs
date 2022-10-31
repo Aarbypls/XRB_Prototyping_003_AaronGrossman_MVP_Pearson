@@ -61,43 +61,26 @@ namespace Minigames.Hit
 
         public string SetObjectivesAndGetUIText()
         {
-            string instructions = String.Empty;
+            string instructionsEnglish = string.Empty;
+            string instructionsNonEnglish = string.Empty;
 
             SetCorrectType();
-
-            switch (_minigameManager.language)
+            
+            switch (correctType)
             {
-                case Language.English:
-                    switch (correctType)
-                    {
-                        case Type.Fly:
-                            instructions = "Hit the fly!";
-                            break;
-                        default:
-                            Debug.Log("Hittable type not set correctly");
-                            break;
-                    }
-                    break;
-                case Language.Spanish:
-                    switch (correctType)
-                    {
-                        case Type.Fly:
-                            instructions = "¡Aplasta la mosca!";
-                            break;
-                        default:
-                            Debug.Log("Hittable type not set correctly");
-                            break;
-                    }
+                case Type.Fly:
+                    instructionsEnglish = "Hit the fly!";
+                    instructionsNonEnglish = "¡Aplasta la mosca!";
                     break;
                 default:
-                    Debug.Log("Language not properly set in the MinigameManager!");
-                    break;               
+                    Debug.Log("Hittable type not set correctly");
+                    break;
             }
             
-            _reportCardItem.prompt = instructions;
-            _reportCardItem.translation = "";
-
-            return instructions;
+            _reportCardItem.prompt = _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
+            _reportCardItem.translation = instructionsEnglish;
+            
+            return _minigameManager.language == Language.English ? instructionsEnglish : instructionsNonEnglish;
         }
 
         public AudioClip GetPromptAudioClip()
@@ -138,7 +121,6 @@ namespace Minigames.Hit
         
         private void OnEnable()
         {
-            _reportCardItem = new ReportCardItem();
             _minigameManager.HideInstructionsText();
             InitializeStartingVariables();
             _weapon.SetActive(true);
