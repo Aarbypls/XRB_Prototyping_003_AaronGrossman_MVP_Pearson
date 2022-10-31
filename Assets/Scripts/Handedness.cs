@@ -18,6 +18,8 @@ public class Handedness : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(this.gameObject.name);
+        
         handed = _gameManager._handedness;
         
         if (handed == Handed.Left)

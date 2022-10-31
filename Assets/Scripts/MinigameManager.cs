@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,12 @@ public class MinigameManager : MonoBehaviour
     
     private List<GameObject> _randomizedMinigames = new List<GameObject>();
     private static Random _rng = new Random();
-    
+
+    private void Awake()
+    {
+        language = (Language)PlayerPrefs.GetInt("language");
+    }
+
     void Start()
     {
         // Probably should be moved out of start
