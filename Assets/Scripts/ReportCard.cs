@@ -38,8 +38,10 @@ public class ReportCard : MonoBehaviour
         
         if (timedOut)
         {
-            reportCardItem += ("\t" + "You ran out of time!" + "\n\n");
+            reportCardItem += ("\t" + "You ran out of time!" + "\n");
         }
+
+        reportCardItem += "\n";
 
         _reportCardItems.text += reportCardItem;
     }

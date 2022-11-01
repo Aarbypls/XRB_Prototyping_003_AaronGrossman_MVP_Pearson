@@ -176,6 +176,8 @@ namespace Minigames.Cut
                 _minigameManager.AddReportCardItemToList(_reportCardItem);
                 _sfxManager.PlayFailureClip();
                 _failureClipPlayed = true;
+                _ending = true;
+                Invoke(nameof(EndGame), 1.1f);
             }
         }
 

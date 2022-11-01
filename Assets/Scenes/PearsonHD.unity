@@ -20142,7 +20142,7 @@ MonoBehaviour:
   - {fileID: 1420585492}
   _minigameInstructions: {fileID: 135059147}
   _promptAudioSource: {fileID: 1670287277}
-  _minigamesPerLevel: 6
+  _minigamesPerLevel: 12
   _minigamesPlayed: 0
   _minigameSuccesses: 0
   _reportCard: {fileID: 1571399983}
